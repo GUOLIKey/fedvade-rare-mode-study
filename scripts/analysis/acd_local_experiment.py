@@ -720,7 +720,7 @@ def main():
                 'paper': 'https://arxiv.org/abs/2601.06404v2',
                 'rate': ACD_RATE, 'k0': ACD_K0, 'max_iter': 100,
                 'modified': False},
-        'local_gmm': {'feature': 'client encoder mu (FedVaDE pre_train)',
+        'client_local_gmm': {'feature': 'client encoder mu (FedVaDE pre_train)',
                       'covariance': 'diag', 'reg_covar': REG_COVAR,
                       'pi_log_epsilon': PI_EPS,
                       'variance_estimator': 'population (ddof=0)'},

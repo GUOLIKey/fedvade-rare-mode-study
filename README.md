@@ -361,8 +361,9 @@ docs/
     17_hiddim_sweep.md        潜空间维度扫描
     18_dpgmm_precheck.md      客户端 DPGMM 预检
 scripts/
-  runner/                     Fashion-MNIST 实验的完整可运行代码
-  analysis/                   Multi-CA 核心、ACD 矩估计
+  README.md                   每个脚本做什么、属于哪条线路
+  runner/                     数据准备、训练、评估、诊断（文件名即用途）
+  analysis/                   server_multica_core.py、acd_local_experiment.py
 results/                      小体积结果 CSV
 ```
 

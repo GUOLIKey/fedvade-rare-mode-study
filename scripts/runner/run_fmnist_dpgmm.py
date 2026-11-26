@@ -51,7 +51,13 @@ def atomic_json(path: Path, obj):
 
 
 def instrument(source: str, pretrain: int) -> str:
-    # 0. pretraining length (author hardcodes pre_epoch=50 in the call)
+    # 0a. hook right after pretraining, used by --dump-pretrain
+    source = once(
+        source,
+        "        pre_train(args, server, clients, weight, pre_epoch=50)\n",
+        "        pre_train(args, server, clients, weight, pre_epoch=50)\n"
+        "        _dump_pretrain(server, clients, DL)\n")
+    # 0b. pretraining length (author hardcodes pre_epoch=50 in the call)
     if pretrain != 50:
         source = once(source, "pre_epoch=50)", "pre_epoch=%d)" % pretrain)
     # 1. data loading
@@ -90,6 +96,11 @@ def main():
     p.add_argument("--batch-size", type=int, default=200)
     p.add_argument("--clients", type=int, default=10)
     p.add_argument("--hid-dim", type=int, default=10)
+    p.add_argument("--local-gmm", choices=("author", "dpgmm", "samek_gmm"), default="dpgmm")
+    p.add_argument("--wcp", type=float, default=0.1, help="DP weight_concentration_prior")
+    p.add_argument("--prune", type=float, default=0.01, help="drop components with weight <= prune")
+    p.add_argument("--dump-pretrain", type=Path, default=None,
+                   help="after pretraining, save each client's local_mu here and stop")
     p.add_argument("--device", choices=("cpu", "cuda"), default="cuda")
     args = p.parse_args()
 
@@ -110,12 +121,16 @@ def main():
         original.splitlines(True), updated.splitlines(True),
         "author/main.py", "copy/main.py")))
     entry.write_text(updated)
+    if args.client_local_gmm != "author":
+        import patch_client_local_gmm
+        patch_client_local_gmm.apply(copy / "model.py")
 
     config = {"dataset": args.dataset, "partition_mode": args.mode, "seed": args.seed,
               "lr": args.lr, "alpha": args.alpha, "schedule": args.schedule,
               "sample": args.sample, "pretrain": args.pretrain, "rounds": args.rounds,
               "save_every": args.save_every, "batch_size": args.batch_size,
               "clients": args.clients, "latent_dim": args.hid_dim, "device": args.device,
+              "client_local_gmm": args.client_local_gmm, "wcp": args.wcp, "prune": args.prune,
               "source_dir": str(src),
               "author_source_hashes": {q.name: sha(q) for q in src.glob("*.py")},
               "executed_main_sha": sha(entry),
@@ -145,14 +160,14 @@ def main():
         config["gpu"] = torch.cuda.get_device_name(0)
     atomic_json(out / "config.json", config)
 
-    import fm_data
+    import data_client_builder
     parse_args = argparse.ArgumentParser.parse_args
     rows, client_losses = [], {}
     nan_events = []
     started = perf_counter()
 
     def _make_data(n_clients, batch_size):
-        k, loaders, (X, y), sizes, stats = fm_data.make_clients(
+        k, loaders, (X, y), sizes, stats = data_client_builder.make_clients(
             args.dataset, args.mode, n_clients, batch_size,
             data_dir=data_dir, source_copy=copy, seed=42)
         config["partition"] = stats
@@ -206,6 +221,42 @@ def main():
         if epoch % args.save_every == 0 or epoch == args.rounds:
             snapshot(epoch, server, clients, full=(epoch == args.rounds))
 
+    import client_local_gmm
+    retained_k = {}
+
+    def _fit_local(local_mu, local_y):
+        if args.client_local_gmm == "author":
+            from sklearn.mixture import GaussianMixture
+            K_l = len(np.unique(local_y))
+            g = GaussianMixture(n_components=K_l, covariance_type="diag", random_state=42).fit(local_mu)
+            return g.weights_, g.means_, g.covariances_, K_l
+        w, m, c, k = client_local_gmm.fit_local(local_mu, args.client_local_gmm, args.wcp, prune=args.prune)
+        return w, m, c, k
+
+    def _record_k(cid, k):
+        retained_k[int(cid)] = int(k)
+        config["retained_K"] = retained_k
+        atomic_json(out / "config.json", config)
+
+    def _dump_pretrain(server, clients, loaders):
+        if args.dump_pretrain is None:
+            return
+        d = Path(args.dump_pretrain).resolve()
+        d.mkdir(parents=True, exist_ok=True)
+        with torch.no_grad():
+            for c, ld in zip(clients, loaders):
+                mus = []
+                for xb, _ in ld:
+                    mu, _s = c["vade"].encoder(xb.to(next(c["vade"].parameters()).device))
+                    mus.append(mu.cpu())
+                np.save(d / ("client_%02d_mu.npy" % c["client_id"]),
+                        torch.cat(mus, 0).numpy())
+        (d / "meta.json").write_text(json.dumps(
+            {"dataset": args.dataset, "mode": args.mode, "seed": args.seed,
+             "hid_dim": args.hid_dim, "clients": args.clients}, indent=2) + "\n")
+        print("pretrain dump written to %s" % d, flush=True)
+        raise SystemExit(0)
+
     def force_device(parser, *a, **kw):
         parsed = parse_args(parser, *a, **kw)
         if hasattr(parsed, "cuda"):
@@ -219,12 +270,19 @@ def main():
     result = {"status": "running", "config": config, "author_argv": author_argv}
     atomic_json(out / "result.json", result)
     try:
+        # pre_train lives in model.py, so the helpers it calls must be visible
+        # in the model module's namespace, not only in main.py's exec namespace
+        import model as _model_mod
+        _model_mod._fit_local = _fit_local
+        _model_mod._record_k = _record_k
         with threadpool_limits(limits=1), \
                 patch.object(sys, "argv", author_argv), \
                 patch.object(argparse.ArgumentParser, "parse_args", force_device):
             namespace = {"__name__": "__main__", "__file__": str(entry),
                          "_observe": observe, "_client_loss": _client_loss,
-                         "_make_data": _make_data}
+                         "_make_data": _make_data,
+                         "_fit_local": _fit_local, "_record_k": _record_k,
+                         "_dump_pretrain": _dump_pretrain}
             exec(compile(updated, str(entry), "exec"), namespace)
         if len(rows) != args.rounds:
             raise RuntimeError("incomplete rounds: %d / %d" % (len(rows), args.rounds))

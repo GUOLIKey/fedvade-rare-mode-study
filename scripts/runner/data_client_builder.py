@@ -21,8 +21,8 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader, TensorDataset
 
-import fmnist_prep
-from clusterlet_partition import make_clusterlet_partition
+import data_fmnist_prep
+from data_clusterlet_partition import make_clusterlet_partition
 
 
 def _loader(X, y, batch_size):
@@ -46,11 +46,11 @@ def _write_csv_once(X, y, path: Path):
 
 
 def make_clients(name, mode, n_clients, batch_size, data_dir, source_copy, seed=42):
-    X, y, meta = fmnist_prep.load(name)          # raw, [0,1]
+    X, y, meta = data_fmnist_prep.load(name)          # raw, [0,1]
     k = int(len(np.unique(y)))
 
     if mode == "clusterlet":
-        Xs, _ = fmnist_prep.standardize(X)
+        Xs, _ = data_fmnist_prep.standardize(X)
         parts, stats = make_clusterlet_partition(Xs, y, n_clients=n_clients, seed=seed)
         loaders = [_loader(Xs[p], y[p], batch_size) for p in parts]
         sizes = [int(len(p)) for p in parts]

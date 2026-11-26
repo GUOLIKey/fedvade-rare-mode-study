@@ -27,8 +27,8 @@ from sklearn.mixture import GaussianMixture
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "data"))
 
-import fmnist_prep  # noqa: E402
-from clusterlet_partition import make_clusterlet_partition, summarize  # noqa: E402
+import data_fmnist_prep  # noqa: E402
+from data_clusterlet_partition import make_clusterlet_partition, summarize  # noqa: E402
 
 
 def knn_purity(X, y, chunk=2000):
@@ -56,8 +56,8 @@ def knn_purity(X, y, chunk=2000):
 
 
 def check(name, rho, n_target, fragments=4, n_clients=10):
-    path = fmnist_prep.build(name, rho, n_target)
-    X, y, meta = fmnist_prep.load(name)
+    path = data_fmnist_prep.build(name, rho, n_target)
+    X, y, meta = data_fmnist_prep.load(name)
     k = len(np.unique(y))
     print("=" * 78)
     print("%s   N=%d  k=%d  dim=%d  rho=%s" % (name, len(y), k, X.shape[1], rho))

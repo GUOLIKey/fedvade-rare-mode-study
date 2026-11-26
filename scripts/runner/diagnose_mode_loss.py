@@ -59,13 +59,13 @@ def main():
     run = args.run.resolve()
     sys.path.insert(0, str(args.source.resolve()))
     sys.path.insert(0, str(args.data_dir.resolve()))
-    import fm_data
+    import data_client_builder
     from model import VaDE
     from types import SimpleNamespace
 
     cfg = json.loads((run / "config.json").read_text())
     HID = int(cfg.get("hid_dim", cfg.get("latent_dim", 10)))
-    k, loaders, (X, y), sizes, _ = fm_data.make_clients(
+    k, loaders, (X, y), sizes, _ = data_client_builder.make_clients(
         args.dataset, args.mode, cfg["clients"], cfg["batch_size"],
         data_dir=args.data_dir.resolve(), source_copy=run / "source", seed=42)
     Xall = X.numpy()

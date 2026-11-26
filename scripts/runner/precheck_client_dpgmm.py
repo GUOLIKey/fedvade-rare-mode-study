@@ -16,7 +16,7 @@ from pathlib import Path
 
 import numpy as np
 
-import local_gmm
+import client_local_gmm
 
 
 def main():
@@ -42,7 +42,7 @@ def main():
     for wcp in a.priors:
         ks, allw, allc = [], [], []
         for m in mus:
-            w, mu, cov = local_gmm.fit_dpgmm(m, wcp, n_components=a.n_components,
+            w, mu, cov = client_local_gmm.fit_dpgmm(m, wcp, n_components=a.n_components,
                                              prune=a.prune)
             ks.append(len(w))
             allw.append(w)
