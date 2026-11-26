@@ -361,9 +361,9 @@ docs/
     17_hiddim_sweep.md        潜空间维度扫描
     18_dpgmm_precheck.md      客户端 DPGMM 预检
 scripts/
-  README.md                   每个脚本做什么、属于哪条线路
-  runner/                     数据准备、训练、评估、诊断（文件名即用途）
-  analysis/                   server_multica_core.py、acd_local_experiment.py
+  README.md                   代码结构说明
+  common/                     九份共享模块（距离、指标、模型、采样、数据、训练循环、评估）
+  lines/                      八条实验线，每条一个文件夹：main.py + README.md
 results/                      小体积结果 CSV
 ```
 

@@ -131,24 +131,16 @@ ACD 完整服务器流程的五组沿用同样命名：**原始 / 同K重拟合 
 
 ## 十、代码文件命名
 
-脚本一律用英文描述性命名，与上面的线路名对应。完整说明见 `scripts/README.md`。
+代码按「一条线路一个文件夹」组织，共享逻辑放在 `common/`。完整说明见 `scripts/README.md`。
 
-| 名字 | 文件 | 对应线路 |
+| 名字 | 位置 | 说明 |
 |---|---|---|
-| 数据准备 | `data_fmnist_prep.py` | 碎片化基准 |
-| 碎片化划分 | `data_clusterlet_partition.py` | 碎片化基准 |
-| 客户端构造 | `data_client_builder.py` | 碎片化基准 |
-| 客户端局部 GMM 补丁 | `patch_client_local_gmm.py` | 客户端 DPGMM |
-| 服务器采样补丁 | `patch_server_sampling.py` | 服务器端重加权 |
-| 主训练入口 | `run_fmnist_clusterlet.py` | 碎片化基准 |
-| DPGMM 训练入口 | `run_fmnist_dpgmm.py` | 客户端 DPGMM |
-| 三划分驱动 | `driver_three_partitions.py` | 碎片化基准 |
-| 潜空间宽度驱动 | `driver_latent_width.py` | 潜空间宽度 |
-| 聚类评估 | `eval_clustering.py` | 全部 |
-| 覆盖率评估 | `eval_coverage_matched.py` | 覆盖率指标 |
-| 前置检验 | `check_data_precondition.py` | 全部 |
-| DPGMM 预检 | `precheck_client_dpgmm.py` | 客户端 DPGMM |
-| 丢失定位 | `diagnose_mode_loss.py` | 丢失定位 |
-| 解码器检查 | `diagnose_decoder_reach.py` | 丢失定位 |
-| 层次聚合核心 | `server_multica_core.py` | 服务器端层次聚合 |
-| ACD 局部实验 | `acd_local_experiment.py` | 客户端自适应聚类 |
+| 共享模块 | `scripts/common/`（9 个文件） | 距离、指标、模型、采样、数据、训练循环、局部 GMM、评估 |
+| 碎片化基准 | `scripts/lines/fmnist_benchmark/main.py` | 数据准备 + 前置检验 + 训练 + 三组驱动 + 评估 |
+| 潜空间宽度 | `scripts/lines/latent_width/main.py` | 10/20/30 维扫描 |
+| 客户端 DPGMM | `scripts/lines/client_dpgmm/main.py` | dump / precheck / driver / eval |
+| 客户端自适应聚类 | `scripts/lines/client_acd/main.py` | ACD 局部实验与接口验证 |
+| 服务器端层次聚合 | `scripts/lines/server_multica/main.py` | Wasserstein + 层次合并 + 矩匹配 |
+| 服务器端重加权 | `scripts/lines/server_reweight/main.py` | 采样下限与责任度下限补丁 |
+| 覆盖率指标 | `scripts/lines/coverage_metric/main.py` | size-matched 覆盖率，含自检 |
+| 丢失定位 | `scripts/lines/diagnostics/main.py` | mode-loss / decoder 两个诊断 |
