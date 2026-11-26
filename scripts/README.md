@@ -54,6 +54,24 @@ lines/coverage_metric/main.py                ← 生成覆盖指标（含自检�
 lines/diagnostics/main.py                    ← 定位诊断
 ```
 
+## 与历史报告的关系
+
+`docs/reports/` 里的报告是**当时运行时的原样记录**，其中"产物 / 脚本"小节引用的是当时的文件名
+（例如 `diagnose_loss.py`、`driver_hiddim.py`、`multica_core.py`）。这些文件后来被合并重命名，
+对照关系是：
+
+| 报告里写的 | 现在的位置 |
+|---|---|
+| `runner_cl_vade.py` / `runner_dpgmm.py` / `model_patch.py` | `common/train.py` |
+| `fm_data.py` / `fmnist_prep.py` / `clusterlet_partition.py` | `common/data.py` |
+| `metrics.py` / `evaluate_saved*.py` | `common/evaluate.py` |
+| `diagnose_loss.py` / `diagnose_decoder.py` | `lines/diagnostics/main.py` |
+| `models_patch_dpgmm.py` / `local_gmm.py` | `common/local_gmm.py` |
+| `multica_core.py` | `lines/server_multica/main.py` |
+| `run_acd_frozen.py` | `lines/client_acd/main.py` |
+
+报告正文里的数字与结论不受重命名影响。
+
 ## 原则
 
 1. **不修改 `FedVaDE_source/`**。训练脚本把四个 `.py` 复制到 run 目录后才打补丁，原文件保持不变。
