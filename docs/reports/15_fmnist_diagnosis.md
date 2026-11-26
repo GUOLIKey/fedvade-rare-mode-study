@@ -1,5 +1,11 @@
 # 5/8/9 类丢失的位置诊断（不训练）
 
+> **⚠ 本报告的结论已被更正，请勿引用。**
+>
+> 本报告中的"某些类被生成模型系统性丢弃"来自当时使用的覆盖率指标，该指标采用全局统一阈值，
+> 对类内散布大的类系统性不利。修正后的 size-matched 指标显示该结论不成立，
+> 详见 [`16_correction.md`](16_correction.md)。原报告保留原样，用于记录当时的推理过程。
+
 2026-11-26。对象：`bal_clusterlet/s0` 与 `lt10_clusterlet/s0` 的第 300 轮 checkpoint。
 脚本：`scripts/diagnose_loss.py`（只读）。产物：各 run 目录下的 `diagnosis.json`。
 
