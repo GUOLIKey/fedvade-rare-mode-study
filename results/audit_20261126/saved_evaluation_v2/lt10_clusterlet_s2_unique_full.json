@@ -1,0 +1,118 @@
+{
+  "schema": "audit_evaluation_v1",
+  "run": "/root/autodl-tmp/fedvade_project/experiments/fmnist_clusterlets_v1/runs/lt10_clusterlet/s2",
+  "dataset": "fmnist_lt10",
+  "mode": "clusterlet",
+  "population": "unique_full",
+  "independent_test": false,
+  "n_evaluation": 10001,
+  "n_client_records": 10001,
+  "n_unique_input": 10001,
+  "input_sha256": "e80a9054a49a6f536b42eb890ad28d90946aecc536a57e0aaf556098651b18a0",
+  "label_sha256": "530a6f9c089cbd3d4ccb33bf7b4bdea9f7ec3f0000304688854578648907c923",
+  "source_hashes": {
+    "dataloader.py": "28fc737a243ea550dc4c18ec98928a51af2701132452c68d1e7ef0d1db9c9cad",
+    "experiment.py": "979739dacb8950e074d8cbc775722aaa5ff8c304a1dba13efc64d97d9da4d758",
+    "main.py": "28f03e075713d0de57789a5a2d4e7093b0f10a86d80a17ac0bc692c4e0f775dc",
+    "model.py": "6cdef32b831d090ee79fa952a6f55386bba2e37a6c0c38d6ebc865441c1379d9"
+  },
+  "data_dir": "/root/autodl-tmp/fedvade_project/experiments/fmnist_clusterlets_v1/data",
+  "inference_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "sd_ddof": 0,
+  "rounds": {
+    "300": {
+      "ari": {
+        "mean": 0.20143606464965763,
+        "sd": 0.00040186886843284484
+      },
+      "purity": {
+        "mean": 0.38353164683531643,
+        "sd": 0.0004359609910327317
+      },
+      "nmi": {
+        "mean": 0.2886414668156695,
+        "sd": 0.000742131440685504
+      },
+      "acc": {
+        "mean": 0.3795220477952205,
+        "sd": 0.0004715458903130402
+      },
+      "draws": [
+        {
+          "ari": 0.20141264679702225,
+          "purity": 0.38296170382961703,
+          "nmi": 0.28859153893739,
+          "acc": 0.37896210378962103
+        },
+        {
+          "ari": 0.2013652983216682,
+          "purity": 0.38376162383761625,
+          "nmi": 0.2887483615857549,
+          "acc": 0.37966203379662034
+        },
+        {
+          "ari": 0.20208628650555033,
+          "purity": 0.38366163383661633,
+          "nmi": 0.2898200750934569,
+          "acc": 0.37966203379662034
+        },
+        {
+          "ari": 0.20122321842811328,
+          "purity": 0.38366163383661633,
+          "nmi": 0.28761326729767667,
+          "acc": 0.37976202379762025
+        },
+        {
+          "ari": 0.20068451256348124,
+          "purity": 0.38376162383761625,
+          "nmi": 0.28755023225850695,
+          "acc": 0.37966203379662034
+        },
+        {
+          "ari": 0.20105340178001005,
+          "purity": 0.38316168383161686,
+          "nmi": 0.288001090379799,
+          "acc": 0.37906209379062095
+        },
+        {
+          "ari": 0.20178662963200888,
+          "purity": 0.38416158384161586,
+          "nmi": 0.2891785898365871,
+          "acc": 0.38016198380161986
+        },
+        {
+          "ari": 0.201589803186637,
+          "purity": 0.38276172382761725,
+          "nmi": 0.28832836885727,
+          "acc": 0.3785621437856214
+        },
+        {
+          "ari": 0.2019275917706967,
+          "purity": 0.38336166383361664,
+          "nmi": 0.2896191998325683,
+          "acc": 0.37976202379762025
+        },
+        {
+          "ari": 0.20123125751138823,
+          "purity": 0.38406159384061594,
+          "nmi": 0.288963944077685,
+          "acc": 0.37996200379962003
+        }
+      ],
+      "checkpoint": "/root/autodl-tmp/fedvade_project/experiments/fmnist_clusterlets_v1/runs/lt10_clusterlet/s2/last_checkpoint.pt",
+      "checkpoint_sha256": "3351892c413f8bbdd0a06b90f1b4b3d9e3eab984a7bbf5a2b63f187dd1acd4d7",
+      "round": 300
+    }
+  }
+}

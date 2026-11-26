@@ -1,0 +1,186 @@
+{
+  "status": "ok",
+  "config": {
+    "dataset": "toy",
+    "partition_mode": "clusterlet",
+    "seed": 7,
+    "lr": 0.002,
+    "alpha": 0.05,
+    "schedule": "author",
+    "sample": 20,
+    "pretrain": 2,
+    "rounds": 3,
+    "save_every": 3,
+    "batch_size": 16,
+    "clients": 2,
+    "latent_dim": 2,
+    "device": "cuda",
+    "local_gmm": "author",
+    "wcp": 0.1,
+    "prune": 0.01,
+    "source_dir": "/root/autodl-tmp/fedvade_project/fuxian-round2/FedVaDE_source",
+    "platform": "Linux-5.15.0-94-generic-x86_64-with-glibc2.35",
+    "author_source_hashes": {
+      "dataloader.py": "28fc737a243ea550dc4c18ec98928a51af2701132452c68d1e7ef0d1db9c9cad",
+      "experiment.py": "979739dacb8950e074d8cbc775722aaa5ff8c304a1dba13efc64d97d9da4d758",
+      "main.py": "33bd9927437c444f3f5355813dba8de1896fd59e2eb3fbd9f16960ff3041b87b",
+      "model.py": "6cdef32b831d090ee79fa952a6f55386bba2e37a6c0c38d6ebc865441c1379d9"
+    },
+    "executed_main_sha": "9959c92183e1568ffdfb6bf427503603f242538ad16457e5c34df8acb8b43b31",
+    "executed_source_hashes": {
+      "dataloader.py": "28fc737a243ea550dc4c18ec98928a51af2701132452c68d1e7ef0d1db9c9cad",
+      "experiment.py": "979739dacb8950e074d8cbc775722aaa5ff8c304a1dba13efc64d97d9da4d758",
+      "main.py": "9959c92183e1568ffdfb6bf427503603f242538ad16457e5c34df8acb8b43b31",
+      "model.py": "6cdef32b831d090ee79fa952a6f55386bba2e37a6c0c38d6ebc865441c1379d9"
+    },
+    "data_dir": "/root/autodl-tmp/fedvade_project/reproduction_runs/audit_repair_20261126/smoke_final/arbitrary_input_location",
+    "data_sha256": "dc565a3e0ac4028006225388dc1d126734c0be9f7883a002a4658e76ba9350fd",
+    "command": [
+      "/root/autodl-tmp/fedvade_project/.venv-gpu/bin/python",
+      "scripts/common/train.py",
+      "--source",
+      "/root/autodl-tmp/fedvade_project/fuxian-round2/FedVaDE_source",
+      "--out",
+      "/root/autodl-tmp/fedvade_project/reproduction_runs/audit_repair_20261126/gpu_smoke_final",
+      "--data-dir",
+      "/root/autodl-tmp/fedvade_project/reproduction_runs/audit_repair_20261126/smoke_final/arbitrary_input_location",
+      "--dataset",
+      "toy",
+      "--mode",
+      "clusterlet",
+      "--device",
+      "cuda",
+      "--clients",
+      "2",
+      "--batch-size",
+      "16",
+      "--hid-dim",
+      "2",
+      "--sample",
+      "20",
+      "--pretrain",
+      "2",
+      "--rounds",
+      "3",
+      "--save-every",
+      "3",
+      "--seed",
+      "7"
+    ],
+    "repair_package": {
+      "package_sha256": "a7689e07ed13cb864046f43fc22ea38ab11e51bc68df0ee3789e9182b18493dd",
+      "files": {
+        "common/__init__.py": "4d69be6dc90ff247a8d20dda803a0fd814b373eb649131587cb1101f34676181",
+        "common/data.py": "4a87f98d6e5719cc5d5151f09b2906990edef9bd788942909c487e1fde6c7760",
+        "common/distances.py": "3dfeb4a732c4466dcd2284a7f542f4befd30c9108ed692a0974766cb4e53060c",
+        "common/evaluate.py": "16410d3a6505b929956e7511e81af2083541b9832980338938e45deabd3e9483",
+        "common/local_gmm.py": "7169804e932dbbabbd03d80948dfed1bdbeddc544195e07595b440ca9f258e4d",
+        "common/metrics.py": "81408e31d88a04414d2157ad4d083f2933c361f23625afa4f7a25d2c0c091c9b",
+        "common/model.py": "78024b2d462c8393190101516e7ac17ec1a173370f796a7594310cd53bec0e69",
+        "common/provenance.py": "f9fa8ef2638546e209bdbe06e9e3f202656e3990d2aef859893eec7f02425285",
+        "common/sampling.py": "c037541dfa8bd2503d423eb828460c79a91d600ea3b6ba10bba2ceb606d24374",
+        "common/train.py": "35bf8c2854173def22deeb789ad5a282e9c22c332d7dee5847f50ad6fbd097ab",
+        "lines/client_acd/main.py": "8b7c7ad237e75a95cb81acc560879c730006a1a8c06521a537fab3ccd4d095f3",
+        "lines/client_dpgmm/main.py": "ef6c46e802f0c1b05705889bd996737d028db6ed0407d21dbf0d9fba7e4edf44",
+        "lines/coverage_metric/main.py": "5051e9c0db8b723a78654d1075bb008fcbbd477734ebf0702f6af00030902518",
+        "lines/diagnostics/main.py": "695d5f8ac430bba1bc6634958fd61b0c92325b9e816b5b7cf1cffc0d8dccfbac",
+        "lines/fmnist_benchmark/main.py": "0842bf2cd784c8ca2dd5694cfce3bd1fd9de108aaa39b7223c787fe3165f7234",
+        "lines/latent_width/main.py": "885aedb6922391baaf134fa8f841fa6229b169542ec6c56f5af3d5aac5bd4733",
+        "lines/server_multica/main.py": "b63ba728f6c86034ffc0b14bf6085e2ba3c966d437508ae21afaa288f5713e81",
+        "lines/server_reweight/main.py": "8873088e4d48eb0302febc70e488bec0c9db7ae4cf6d77198c7ca9520d93ac64"
+      }
+    },
+    "runtime_packages": {
+      "torch": "2.0.1+cu118",
+      "numpy": "1.25.2",
+      "scikit-learn": "1.7.2",
+      "scipy": "1.15.3",
+      "pandas": "2.3.2",
+      "munkres": "1.1.4",
+      "threadpoolctl": "3.8.0"
+    },
+    "python": "3.11.18 (main, Oct 26 2026, 18:19:35) [GCC 14.3.0]",
+    "sample_floor": 0,
+    "usage_floor": 0.0,
+    "usage_beta": 4.0,
+    "torch": "2.0.1+cu118",
+    "numpy": "1.25.2",
+    "cuda_available": true,
+    "imported_model_file": "/root/autodl-tmp/fedvade_project/reproduction_runs/audit_repair_20261126/gpu_smoke_final/source/model.py",
+    "partition": {
+      "sizes": [
+        122,
+        118
+      ],
+      "classes_per_client": [
+        2,
+        2
+      ],
+      "clients_per_class": {
+        "0": 2,
+        "1": 2
+      },
+      "n_fragments": 8,
+      "overlap_samples": 0
+    },
+    "input_dim": 4,
+    "clusters": 2,
+    "client_sizes": [
+      122,
+      118
+    ],
+    "input_sha256": "5b8e877bb8b4703af297052a960ca6902be780da96ce4f906b3e8b8e8b9c1c56",
+    "label_sha256": "0c52fd844b45cd581cf27b3e22a1d8028f8f5aa70e1bb764b8186d241aebc6c7",
+    "client_data_hashes": [
+      {
+        "x": "452edc2f2850e86aa658c62cec8e1704f3b39310c38262769f1666c0834d2e20",
+        "y": "a6944df43d7032d2eb743aff0b8ad47300a87755e9c7eb26b416eef3f18c60c5"
+      },
+      {
+        "x": "0090c6f88b45ed54cf601f2150c1cf743906fe128b7f835ab2ed5e90428a89be",
+        "y": "73f702f22a7c84f623cdeb9bad331a607bf8915102627ca299a0447899fba9f3"
+      }
+    ]
+  },
+  "author_argv": [
+    "/root/autodl-tmp/fedvade_project/reproduction_runs/audit_repair_20261126/gpu_smoke_final/source/main.py",
+    "--dataset",
+    "toy",
+    "--epoch",
+    "3",
+    "--lr",
+    "0.002",
+    "--alpha",
+    "0.05",
+    "--sample",
+    "20",
+    "--client_num",
+    "2",
+    "--batch_size",
+    "16",
+    "--hid_dim",
+    "2"
+  ],
+  "last": {
+    "round": 3,
+    "client_loss": 37.50829315185547,
+    "server_loss": 43.61317825317383,
+    "purity": 1.0,
+    "ari": 1.0,
+    "client_losses": {
+      "0": 3.884678840637207,
+      "1": 4.7873382568359375
+    },
+    "server_lr": 0.002,
+    "client_lr": [
+      0.0014449999999999999,
+      0.0014449999999999999
+    ],
+    "nonfinite_server_params": [],
+    "nonfinite_client_params": {},
+    "nonfinite_client_losses": [],
+    "elapsed_seconds": 1.2359974682331085
+  },
+  "nan_events": 0,
+  "elapsed_seconds": 1.2874602563679218
+}

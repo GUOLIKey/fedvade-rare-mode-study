@@ -19,11 +19,11 @@ def apply(path: Path, sample_floor: int, usage_floor: float, beta: float) -> Non
     if sample_floor > 0:
         old = "    y_hat = np.random.choice(K, size=nums, p=global_pi)"
         new = """    _floor = %d
-    if _floor * K < nums:
+    if _floor * K > nums:
+        raise ValueError('sample floor exceeds total sampling budget')
+    if _floor * K <= nums:
         _counts = np.full(K, _floor)
         _counts += np.random.multinomial(nums - _floor * K, global_pi)
-    else:
-        _counts = np.maximum(1, np.floor(global_pi * nums)).astype(int)
     y_hat = np.repeat(np.arange(K), _counts)
     np.random.shuffle(y_hat)""" % sample_floor
         src = _once(src, old, new)

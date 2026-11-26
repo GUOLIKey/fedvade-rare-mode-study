@@ -1,0 +1,156 @@
+{
+  "schema": "audit_evaluation_v1",
+  "run": "/root/autodl-tmp/fedvade_project/experiments/fmnist_clusterlets_v1/runs/lt10_clusterlet/s1",
+  "dataset": "fmnist_lt10",
+  "mode": "clusterlet",
+  "repair_package": {
+    "package_sha256": "a7689e07ed13cb864046f43fc22ea38ab11e51bc68df0ee3789e9182b18493dd",
+    "files": {
+      "common/__init__.py": "4d69be6dc90ff247a8d20dda803a0fd814b373eb649131587cb1101f34676181",
+      "common/data.py": "4a87f98d6e5719cc5d5151f09b2906990edef9bd788942909c487e1fde6c7760",
+      "common/distances.py": "3dfeb4a732c4466dcd2284a7f542f4befd30c9108ed692a0974766cb4e53060c",
+      "common/evaluate.py": "16410d3a6505b929956e7511e81af2083541b9832980338938e45deabd3e9483",
+      "common/local_gmm.py": "7169804e932dbbabbd03d80948dfed1bdbeddc544195e07595b440ca9f258e4d",
+      "common/metrics.py": "81408e31d88a04414d2157ad4d083f2933c361f23625afa4f7a25d2c0c091c9b",
+      "common/model.py": "78024b2d462c8393190101516e7ac17ec1a173370f796a7594310cd53bec0e69",
+      "common/provenance.py": "f9fa8ef2638546e209bdbe06e9e3f202656e3990d2aef859893eec7f02425285",
+      "common/sampling.py": "c037541dfa8bd2503d423eb828460c79a91d600ea3b6ba10bba2ceb606d24374",
+      "common/train.py": "35bf8c2854173def22deeb789ad5a282e9c22c332d7dee5847f50ad6fbd097ab",
+      "lines/client_acd/main.py": "8b7c7ad237e75a95cb81acc560879c730006a1a8c06521a537fab3ccd4d095f3",
+      "lines/client_dpgmm/main.py": "ef6c46e802f0c1b05705889bd996737d028db6ed0407d21dbf0d9fba7e4edf44",
+      "lines/coverage_metric/main.py": "5051e9c0db8b723a78654d1075bb008fcbbd477734ebf0702f6af00030902518",
+      "lines/diagnostics/main.py": "695d5f8ac430bba1bc6634958fd61b0c92325b9e816b5b7cf1cffc0d8dccfbac",
+      "lines/fmnist_benchmark/main.py": "0842bf2cd784c8ca2dd5694cfce3bd1fd9de108aaa39b7223c787fe3165f7234",
+      "lines/latent_width/main.py": "885aedb6922391baaf134fa8f841fa6229b169542ec6c56f5af3d5aac5bd4733",
+      "lines/server_multica/main.py": "b63ba728f6c86034ffc0b14bf6085e2ba3c966d437508ae21afaa288f5713e81",
+      "lines/server_reweight/main.py": "8873088e4d48eb0302febc70e488bec0c9db7ae4cf6d77198c7ca9520d93ac64"
+    }
+  },
+  "runtime_packages": {
+    "torch": "2.0.1+cu118",
+    "numpy": "1.25.2",
+    "scikit-learn": "1.7.2",
+    "scipy": "1.15.3",
+    "pandas": "2.3.2",
+    "munkres": "1.1.4",
+    "threadpoolctl": "3.8.0"
+  },
+  "training_seed_from_config": 1,
+  "environment": {
+    "torch": "2.0.1+cu118",
+    "numpy": "1.25.2",
+    "torch_threads": 1
+  },
+  "population": "unique_full",
+  "independent_test": false,
+  "n_evaluation": 10001,
+  "n_client_records": 10001,
+  "n_unique_input": 10001,
+  "input_sha256": "e80a9054a49a6f536b42eb890ad28d90946aecc536a57e0aaf556098651b18a0",
+  "label_sha256": "530a6f9c089cbd3d4ccb33bf7b4bdea9f7ec3f0000304688854578648907c923",
+  "source_hashes": {
+    "dataloader.py": "28fc737a243ea550dc4c18ec98928a51af2701132452c68d1e7ef0d1db9c9cad",
+    "experiment.py": "979739dacb8950e074d8cbc775722aaa5ff8c304a1dba13efc64d97d9da4d758",
+    "main.py": "28f03e075713d0de57789a5a2d4e7093b0f10a86d80a17ac0bc692c4e0f775dc",
+    "model.py": "6cdef32b831d090ee79fa952a6f55386bba2e37a6c0c38d6ebc865441c1379d9"
+  },
+  "data_dir": "/root/autodl-tmp/fedvade_project/experiments/fmnist_clusterlets_v1/data",
+  "inference_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "sd_ddof": 0,
+  "rounds": {
+    "300": {
+      "ari": {
+        "mean": 0.24724222619021052,
+        "sd": 0.0007798269139613134
+      },
+      "purity": {
+        "mean": 0.4603939606039396,
+        "sd": 0.000668064917047893
+      },
+      "nmi": {
+        "mean": 0.37560060493611375,
+        "sd": 0.0009969151479385506
+      },
+      "acc": {
+        "mean": 0.4226677332266774,
+        "sd": 0.0005939944701641468
+      },
+      "draws": [
+        {
+          "ari": 0.24756442859686148,
+          "purity": 0.46135386461353867,
+          "nmi": 0.37680290844482167,
+          "acc": 0.42285771422857715
+        },
+        {
+          "ari": 0.24619435352348976,
+          "purity": 0.45955404459554045,
+          "nmi": 0.37422309611816573,
+          "acc": 0.42185781421857815
+        },
+        {
+          "ari": 0.24632144143926488,
+          "purity": 0.45935406459354067,
+          "nmi": 0.3751143979504252,
+          "acc": 0.42205779422057793
+        },
+        {
+          "ari": 0.24695288729798598,
+          "purity": 0.46035396460353967,
+          "nmi": 0.37548998787183663,
+          "acc": 0.4223577642235776
+        },
+        {
+          "ari": 0.24702120426777122,
+          "purity": 0.46005399460054,
+          "nmi": 0.3743300809228126,
+          "acc": 0.4226577342265773
+        },
+        {
+          "ari": 0.2473944044515403,
+          "purity": 0.46055394460553944,
+          "nmi": 0.37682127255095454,
+          "acc": 0.42295770422957707
+        },
+        {
+          "ari": 0.2469084313006793,
+          "purity": 0.46065393460653936,
+          "nmi": 0.3755041782319848,
+          "acc": 0.42275772422757724
+        },
+        {
+          "ari": 0.24818982534614448,
+          "purity": 0.4607539246075392,
+          "nmi": 0.375952803738741,
+          "acc": 0.4236576342365763
+        },
+        {
+          "ari": 0.24891214434133296,
+          "purity": 0.46145385461453853,
+          "nmi": 0.3770979218996457,
+          "acc": 0.42355764423557646
+        },
+        {
+          "ari": 0.24696314133703479,
+          "purity": 0.45985401459854014,
+          "nmi": 0.3746694016317499,
+          "acc": 0.42195780421957807
+        }
+      ],
+      "checkpoint": "/root/autodl-tmp/fedvade_project/experiments/fmnist_clusterlets_v1/runs/lt10_clusterlet/s1/last_checkpoint.pt",
+      "checkpoint_sha256": "fe5127645c80282a9be6409dd6fe29a4bc0ee417e88ec47c0badf1c04eaa904e",
+      "round": 300
+    }
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "scope": "real reference-set class deletion, equal total sample count; not a learned generator",
+  "split_seed": 0,
+  "replacement_seed": 0,
+  "datasets": [
+    {
+      "dataset": "fmnist_bal",
+      "input_sha256": "e43bfced369fd6251571a2500fbc8a5169c7ed077255beb5831740cbbd0d3b03",
+      "identity": {
+        "overall_ratio": 1.0,
+        "per_class": [
+          {
+            "class": 0,
+            "n_query": 500,
+            "median_d_real": 13.328496932983398,
+            "median_d_gen": 13.328496932983398,
+            "ratio": 1.0
+          },
+          {
+            "class": 1,
+            "n_query": 500,
+            "median_d_real": 8.601610660552979,
+            "median_d_gen": 8.601610660552979,
+            "ratio": 1.0
+          },
+          {
+            "class": 2,
+            "n_query": 500,
+            "median_d_real": 12.802588939666748,
+            "median_d_gen": 12.802588939666748,
+            "ratio": 1.0
+          },
+          {
+            "class": 3,
+            "n_query": 500,
+            "median_d_real": 12.099374294281006,
+            "median_d_gen": 12.099374294281006,
+            "ratio": 1.0
+          },
+          {
+            "class": 4,
+            "n_query": 500,
+            "median_d_real": 12.457532405853271,
+            "median_d_gen": 12.457532405853271,
+            "ratio": 1.0
+          },
+          {
+            "class": 5,
+            "n_query": 500,
+            "median_d_real": 16.502771377563477,
+            "median_d_gen": 16.502771377563477,
+            "ratio": 1.0
+          },
+          {
+            "class": 6,
+            "n_query": 500,
+            "median_d_real": 13.142258167266846,
+            "median_d_gen": 13.142258167266846,
+            "ratio": 1.0
+          },
+          {
+            "class": 7,
+            "n_query": 500,
+            "median_d_real": 12.70381784439087,
+            "median_d_gen": 12.70381784439087,
+            "ratio": 1.0
+          },
+          {
+            "class": 8,
+            "n_query": 500,
+            "median_d_real": 22.359219551086426,
+            "median_d_gen": 22.359219551086426,
+            "ratio": 1.0
+          },
+          {
+            "class": 9,
+            "n_query": 500,
+            "median_d_real": 16.579909324645996,
+            "median_d_gen": 16.579909324645996,
+            "ratio": 1.0
+          }
+        ]
+      },
+      "deletion_controls": [
+        {
+          "deleted_class": 1,
+          "removed_reference_count": 500,
+          "n_ref": 5000,
+          "n_gen": 5000,
+          "ratio": 1.9655067372512214
+        },
+        {
+          "deleted_class": 5,
+          "removed_reference_count": 500,
+          "n_ref": 5000,
+          "n_gen": 5000,
+          "ratio": 1.0973625798279167
+        },
+        {
+          "deleted_class": 8,
+          "removed_reference_count": 500,
+          "n_ref": 5000,
+          "n_gen": 5000,
+          "ratio": 1.2714031329294806
+        },
+        {
+          "deleted_class": 9,
+          "removed_reference_count": 500,
+          "n_ref": 5000,
+          "n_gen": 5000,
+          "ratio": 1.345049997713585
+        }
+      ]
+    },
+    {
+      "dataset": "fmnist_lt10",
+      "input_sha256": "e80a9054a49a6f536b42eb890ad28d90946aecc536a57e0aaf556098651b18a0",
+      "identity": {
+        "overall_ratio": 1.0,
+        "per_class": [
+          {
+            "class": 0,
+            "n_query": 1224,
+            "median_d_real": 12.947735786437988,
+            "median_d_gen": 12.947735786437988,
+            "ratio": 1.0
+          },
+          {
+            "class": 1,
+            "n_query": 948,
+            "median_d_real": 8.509186267852783,
+            "median_d_gen": 8.509186267852783,
+            "ratio": 1.0
+          },
+          {
+            "class": 2,
+            "n_query": 734,
+            "median_d_real": 12.90205717086792,
+            "median_d_gen": 12.90205717086792,
+            "ratio": 1.0
+          },
+          {
+            "class": 3,
+            "n_query": 568,
+            "median_d_real": 12.156686305999756,
+            "median_d_gen": 12.156686305999756,
+            "ratio": 1.0
+          },
+          {
+            "class": 4,
+            "n_query": 440,
+            "median_d_real": 12.635392189025879,
+            "median_d_gen": 12.635392189025879,
+            "ratio": 1.0
+          },
+          {
+            "class": 5,
+            "n_query": 341,
+            "median_d_real": 19.04889678955078,
+            "median_d_gen": 19.04889678955078,
+            "ratio": 1.0
+          },
+          {
+            "class": 6,
+            "n_query": 264,
+            "median_d_real": 12.94188642501831,
+            "median_d_gen": 12.94188642501831,
+            "ratio": 1.0
+          },
+          {
+            "class": 7,
+            "n_query": 204,
+            "median_d_real": 15.700213432312012,
+            "median_d_gen": 15.700213432312012,
+            "ratio": 1.0
+          },
+          {
+            "class": 8,
+            "n_query": 158,
+            "median_d_real": 28.599841117858887,
+            "median_d_gen": 28.599841117858887,
+            "ratio": 1.0
+          },
+          {
+            "class": 9,
+            "n_query": 123,
+            "median_d_real": 22.34199333190918,
+            "median_d_gen": 22.34199333190918,
+            "ratio": 1.0
+          }
+        ]
+      },
+      "deletion_controls": [
+        {
+          "deleted_class": 1,
+          "removed_reference_count": 947,
+          "n_ref": 4997,
+          "n_gen": 4997,
+          "ratio": 1.9921729585957613
+        },
+        {
+          "deleted_class": 5,
+          "removed_reference_count": 340,
+          "n_ref": 4997,
+          "n_gen": 4997,
+          "ratio": 1.1000007209294222
+        },
+        {
+          "deleted_class": 8,
+          "removed_reference_count": 158,
+          "n_ref": 4997,
+          "n_gen": 4997,
+          "ratio": 1.1674075523489245
+        },
+        {
+          "deleted_class": 9,
+          "removed_reference_count": 122,
+          "n_ref": 4997,
+          "n_gen": 4997,
+          "ratio": 1.2653609181570304
+        }
+      ]
+    }
+  ]
+}

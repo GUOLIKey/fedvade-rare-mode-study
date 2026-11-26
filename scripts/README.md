@@ -1,79 +1,49 @@
-# 代码目录
+# Code capabilities after the audit repair
 
-```
-common/     九份共享模块：距离、指标、模型、采样、数据、训练循环、局部 GMM、评估
-lines/      八条实验线，每条一个文件夹，内含 main.py 与 README.md
-```
+The consolidated scripts are a repaired interface, not the historical executed version. Original scripts/configs/logs are archived separately with hashes. Historical result numbers are not automatically results of this implementation.
 
-**一条线路一个文件夹，主逻辑写在 `main.py`，数据与评估这类通用部分放在 `common/` 复用。**
+## Shared modules
 
----
+- `data.py`: cached raw Fashion-MNIST, UCI author CSVs, standardization, our K-Means-fragment partition and loaders. Partition assignment includes seeded 0.15 candidate-swap jitter. `standardize` preserves the historical `(array, reference_or_None)` contract.
+- `provenance.py`: explicit source/data lookup, hashes and non-overwriting JSON output.
+- `train.py`: one subprocess per run, author/DP/sameK local fitting, effective scheduler patch, optional server reweight patches, diagnostics and evaluation-only checkpoints. It does not implement every historical ACD/Multi-CA training runner.
+- `local_gmm.py`: DP fit/pruning and same-K ordinary GMM. The DP component cap and fitting seed remain implementation parameters; the precheck CLI exposes them. Full training currently uses cap15/fitseed42.
+- `evaluate.py`: saved-model prediction using either `legacy_clients` or `unique_full`, with explicit data and output paths. Reports ARI/Purity/NMI/ACC, individual draws and inference-seed SD (ddof0).
+- `model.py`, `sampling.py`, `distances.py`, `metrics.py`: explicit author-model construction, server generation, nearest-neighbour distances and clustering metrics.
 
-## common/
+## Lines and actual entry points
 
-| 文件 | 内容 |
+| Directory | Capability |
 |---|---|
-| `data.py` | Fashion-MNIST 下载与缓存、长尾构造、标准化、Clusterlets 划分、客户端构造、对半分 |
-| `distances.py` | 最近邻距离、自身最近邻、1-近邻纯度。全部用 Gram 恒等式，避免广播产生的巨型临时数组 |
-| `metrics.py` | ARI / Purity / NMI / ACC |
-| `model.py` | 从 checkpoint 构造作者 VaDE、取后验均值、算责任度、分量统计表 |
-| `sampling.py` | 从服务器 GMM 采潜向量、解码、一步生成 |
-| `local_gmm.py` | DPGMM 拟合与剪枝、同 K 普通 GMM 对照 |
-| `train.py` | **唯一的联邦训练循环**：复制作者源码→打补丁→注入钩子→跑 300 轮，含逐客户端损失、NaN 扫描、checkpoint |
-| `evaluate.py` | 对一个 run 算 Global ARI / Purity / NMI（10 个推理种子） |
+| `fmnist_benchmark/` | `prepare`, `check`, `run`, `driver`, `eval`; full new runs only in new output folders |
+| `latent_width/` | Width-sweep driver; historical results still require original checkpoints/configs |
+| `client_dpgmm/` | `dump`, `precheck`, `driver`, `eval`; running a driver is new training, not part of this repair |
+| `coverage_metric/` | Saved-model distance ratios, explicit generation/split seeds, identity and synthetic missing-class controls |
+| `diagnostics/` | Saved-model component/reconstruction diagnostics; global-tau oracle values remain historical diagnostics, not causal class-capability evidence |
+| `client_acd/` | Archived frozen experiment implementation with historical server paths and external FCPL dependency; not a portable/common training CLI |
+| `server_multica/` | Algorithm library, not a run/driver CLI; includes normalized-Bures complete-linkage, an optional centroid-linkage branch, a separate plain raw-W2 average-linkage comparison, optional weight-floor sanitation, and conditional component sampling/ownership metadata; a function existing is not evidence that an experimental arm was run |
+| `server_reweight/` | Source-patch library; invoked by common/train via `--sample-floor`, `--usage-floor`, `--usage-beta` |
 
-> `train.py` 覆盖了原来两个 runner（普通 FedVaDE 与 DPGMM）的全部功能，
-> 通过 `--local-gmm author|dpgmm|samek_gmm` 切换；采样与损失补丁通过 `--local-gmm` 之外的开关施加。
+The training arguments `--local-gmm author|dpgmm|samek_gmm` change local construction. `--schedule author|epoch` changes actual client scheduler placement. Server sample-floor rejects budgets too small to cover all pooled components; it never silently changes the total sample count.
 
-## lines/
+## Evaluation without training
 
-| 文件夹 | 线路 | 问的问题 |
-|---|---|---|
-| `fmnist_benchmark/` | 碎片化基准 | 换稀有类可分的数据集，还会不会丢类 |
-| `latent_width/` | 潜空间宽度 | 覆盖是不是被 10 维潜空间卡住 |
-| `client_dpgmm/` | 客户端 DPGMM | DP 先验能否替代"用标签定 K" |
-| `client_acd/` | 客户端自适应聚类 | ACD 切簇后转成高斯参数能否改善全局 |
-| `server_multica/` | 服务器端层次聚合 | 解析合并替换重采样 |
-| `server_reweight/` | 服务器端重加权 | 强制稀有分量被采到 |
-| `coverage_metric/` | 覆盖率指标 | 自造指标可不可信 |
-| `diagnostics/` | 丢失定位 | 生不出来的类，问题在哪一环 |
+From the code folder in the server environment:
 
-每个文件夹的 README 写明：问的问题、怎么运行、得到的结论、以及对应的报告文件。
-
-## 运行顺序
-
-```
-common/data.build_dataset                    ← 先准备数据
-  ↓
-lines/fmnist_benchmark  check                ← 训练前必做的可用性检验
-  ↓
-lines/*/main.py  run|driver                  ← 训练（内部调用 common/train）
-  ↓
-common/evaluate.evaluate_run                 ← 聚类指标
-lines/coverage_metric/main.py                ← 生成覆盖指标（含自检）
-lines/diagnostics/main.py                    ← 定位诊断
+```bash
+python scripts/common/evaluate.py --run RUN --data-dir DATA --population unique_full --rounds 300 --output NEW_OUTPUT.json
+python scripts/common/evaluate.py --run RUN --data-dir DATA --population legacy_clients --rounds 300 --output OTHER_NEW_OUTPUT.json
+python scripts/lines/coverage_metric/main.py --metric-controls
+python scripts/lines/coverage_metric/main.py --run RUN --data-dir DATA --generation-seeds 0 1 2 --split-seeds 0 --output COVERAGE_NEW.json
+python scripts/lines/diagnostics/main.py mode-loss --run RUN --data-dir DATA --output DIAGNOSIS_NEW.json
 ```
 
-## 与历史报告的关系
+An old config without `data_dir` requires an explicit path. New configs record data/source/input/partition hashes. Standalone commands load the run's own source explicitly. Existing JSON outputs are not overwritten. `unique_full` counts every original input observation once; it does not merge identical feature vectors.
 
-`docs/reports/` 里的报告是**当时运行时的原样记录**，其中"产物 / 脚本"小节引用的是当时的文件名
-（例如 `diagnose_loss.py`、`driver_hiddim.py`、`multica_core.py`）。这些文件后来被合并重命名，
-对照关系是：
+Historical Fashion-MNIST coverage used one generation seed and one split seed. The new CLI distinguishes these from prediction inference seeds; multi-generation uncertainty is reported within each training run. Three repeated draws are not three independent trainings.
 
-| 报告里写的 | 现在的位置 |
-|---|---|
-| `runner_cl_vade.py` / `runner_dpgmm.py` / `model_patch.py` | `common/train.py` |
-| `fm_data.py` / `fmnist_prep.py` / `clusterlet_partition.py` | `common/data.py` |
-| `metrics.py` / `evaluate_saved*.py` | `common/evaluate.py` |
-| `diagnose_loss.py` / `diagnose_decoder.py` | `lines/diagnostics/main.py` |
-| `model_patch_dpgmm.py` / `local_gmm.py` | `common/local_gmm.py` |
-| `multica_core.py` | `lines/server_multica/main.py` |
-| `run_acd_frozen.py` | `lines/client_acd/main.py` |
+## Verification
 
-报告正文里的数字与结论不受重命名影响。
+`tests/test_regressions.py` covers the repaired contracts. `tests/server_smoke.py` uses a synthetic dataset, two pretrain rounds and three formal-loop rounds to check plumbing in isolated outputs; these are smoke tests, not research experiments. `tests/server_verify_saved.py` compares historical and repaired input/partition tensors, preserves legacy metrics and adds unique-sample metrics for saved weights.
 
-## 原则
-
-1. **不修改 `FedVaDE_source/`**。训练脚本把四个 `.py` 复制到 run 目录后才打补丁，原文件保持不变。
-2. **共享代码只在 `common/` 写一份**，线路文件只做组织与命令行。
-3. **自造指标必须内建自检**（见 `lines/coverage_metric`）。
+Historical BC/yeast/ACD/Multi-CA full-loop runners remain in the evidence archive. Do not imply those implementations were merged solely because a core helper was moved.

@@ -1,5 +1,8 @@
 # FedVaDE + Multi-CA 2×2 Warm-Start Report
 
+> **2026-11-26 审核更正（优先于下方历史正文）：** 全组warm-start相对初值退化不能归因于Multi-CA。配对ARI在作者/F01支路方向不同，NLL/MMD/SWD两支路改善；仍有K变化混淆。
+> 当前结论与复现边界见 [README](../../README.md) 和 [结论状态](../conclusion_status.md)。
+
 **Status:** 12/12 runs completed; 300 formal rounds each; no pretraining; no zero-start baseline.
 
 ## 1. Mandatory limitation: server-only source weights

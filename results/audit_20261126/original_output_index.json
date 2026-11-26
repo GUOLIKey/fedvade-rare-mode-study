@@ -1,0 +1,157 @@
+[
+  {
+    "path": "reproduction_runs/round15_c13_seeds_v1/runs/C13_s1/evaluation_summary.json",
+    "sha256": "f5031190bbf48e05d466b71a26110bbd6cfe73f05dcb613e042dc49db74bd37c",
+    "bytes": 8878
+  },
+  {
+    "path": "reproduction_runs/round15_c13_seeds_v1/runs/C13_s1/config.json",
+    "sha256": "c8be5f7ce8e69f18c5df5f36ff4d1ac79d2daf5f7663efb64a30a1d834fe3cb1",
+    "bytes": 4432
+  },
+  {
+    "path": "reproduction_runs/round15_c13_seeds_v1/runs/C13_s1/inference.csv",
+    "sha256": "94766178adfddd9c83c70c57c062710c520df7200aa623189769eb6cd5d1b829",
+    "bytes": 9928
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/bal_clusterlet/s0/config.json",
+    "sha256": "cadaab3bf8cd5a695cf664ef915807643fe21256d0610366ea2d57453dc7937e",
+    "bytes": 2589
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/bal_clusterlet/s0/metrics.json",
+    "sha256": "92eab2aac06a8d696d42cb59313602dcec361df807f5e920a12855865944d8eb",
+    "bytes": 4116
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/bal_clusterlet/s0/coverage_v2.json",
+    "sha256": "28a417bcda33057e005cebd526015007857162ef15cb84cc90da90319d555bc2",
+    "bytes": 1657
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/bal_clusterlet/s1/config.json",
+    "sha256": "294af75383eded10c1d82eaed25fa56a2108e318961ff6b548ab86f2eb34ac61",
+    "bytes": 2589
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/bal_clusterlet/s1/metrics.json",
+    "sha256": "b4c9f6563c3185b39084e1db675ac7f3fe7c9ed22fb98ea6064d3dde63a87775",
+    "bytes": 4132
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/bal_clusterlet/s1/coverage_v2.json",
+    "sha256": "007a58664f6b9a4fd36bd5b2bb4048305036bbc799efe2c622a6a2f3e9a5bb43",
+    "bytes": 1657
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/bal_clusterlet/s2/config.json",
+    "sha256": "e53aaabaae4e02ebc3bff1a0a69b57d482e04c2bd0e8734928fbac01b43591b0",
+    "bytes": 2589
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/bal_clusterlet/s2/metrics.json",
+    "sha256": "5bedfc1381488e104687a1a362fdbe71a829990089a958c562bad427a42fe1c9",
+    "bytes": 4144
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/bal_clusterlet/s2/coverage_v2.json",
+    "sha256": "275c7edf71289caca0a7453e374ecf0f378c9f2a1683a1554f70782a28801bcd",
+    "bytes": 1656
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/lt10_clusterlet/s0/config.json",
+    "sha256": "f50e54350bdd0954cfd295e7d9e386f2dce2eb4200d315bc0e7b5f40d5634879",
+    "bytes": 2594
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/lt10_clusterlet/s0/metrics.json",
+    "sha256": "0771eaf6437727aa7b3dc4645f94bacf31c8f0ad8b79fa42c7635bcbcef32343",
+    "bytes": 4663
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/lt10_clusterlet/s0/coverage_v2.json",
+    "sha256": "826dd8941e067d6c37fc062ebde9c5ff650fca00f39d174129cc64b8f744d7bf",
+    "bytes": 1658
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/lt10_clusterlet/s1/config.json",
+    "sha256": "1bac22a07c66db2bcc44bd1b0919bd988b7f2fdc87286bfdbbb6f259ba395fe2",
+    "bytes": 2594
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/lt10_clusterlet/s1/metrics.json",
+    "sha256": "b2cd67502cd1ca94df2d2406acdcf17d48aeb49a34a8c89bf4e7c2ce9a61947f",
+    "bytes": 4698
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/lt10_clusterlet/s1/coverage_v2.json",
+    "sha256": "cef5d6de734c75d1e3ab0c5f636d13318d26a9d594701e23d191b121cfa0f5ef",
+    "bytes": 1659
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/lt10_clusterlet/s2/config.json",
+    "sha256": "174652afcfc3eb2150ea4cade5b43256d7955781226e2944f64183c44d368f61",
+    "bytes": 2594
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/lt10_clusterlet/s2/metrics.json",
+    "sha256": "b8ea34fa1a4e5f2f82e390e8ac321f43daf7d8ee0f7566e777044d5818347f5c",
+    "bytes": 4613
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/lt10_clusterlet/s2/coverage_v2.json",
+    "sha256": "4542e6d04276c9fc5451a63b516e164984bfc0b44a2caad02bae67c9e8c7eb11",
+    "bytes": 1656
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/lt10_author/s0/config.json",
+    "sha256": "09db9b7584496d7d10b4abdff49541a8b300ec00c1419bf328920d5abed34ee5",
+    "bytes": 2096
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/lt10_author/s0/metrics.json",
+    "sha256": "332853584fb8261a32cf871f839a024b3aba1962f37a54b2994fa22fbdce1c8d",
+    "bytes": 4706
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/lt10_author/s0/coverage_v2.json",
+    "sha256": "b69bcfd851dc4872cf1bb5f4ac11680f3ac3b4e0bd581f4d90d5fcfabc916010",
+    "bytes": 1649
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/lt10_author/s1/config.json",
+    "sha256": "176d77daa58714e45b0ed9588ccc9984dcba40300a272bf7aa8726fc5bd60869",
+    "bytes": 2096
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/lt10_author/s1/metrics.json",
+    "sha256": "752c170a2a7fe8f08d1dd3cc2408db6a78bcded8028bbfb4196bfdb2bf07ff82",
+    "bytes": 4700
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/lt10_author/s1/coverage_v2.json",
+    "sha256": "60f8eaea18b9dbef85c74006f2ae3a19594e97e553d98a08f1ae07fbf8b7b69b",
+    "bytes": 1649
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/lt10_author/s2/config.json",
+    "sha256": "c483282ab17615d0b67f86a0ef83db9d50b48e8814d10276849348e16736dca7",
+    "bytes": 2096
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/lt10_author/s2/metrics.json",
+    "sha256": "3d5ac87d08a0d842d78cc48b92b2fe892c147ebb81746760f7ad6fa1d51d66b5",
+    "bytes": 4670
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/lt10_author/s2/coverage_v2.json",
+    "sha256": "ae5a8dd5e071ff7e80b95560981fa99c8a6e91697bc59e9cfa70d9fbf9b8f4e0",
+    "bytes": 1648
+  },
+  {
+    "path": "experiments/fmnist_clusterlets_v1/runs/bal_clusterlet/s0/decoder_check.json",
+    "sha256": "982bd84825c55f36d08ac2af605f04e8d7156d3d8842c1131868fbc8d0f61077",
+    "bytes": 2982
+  }
+]

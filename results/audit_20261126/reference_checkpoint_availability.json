@@ -1,0 +1,114 @@
+[
+  {
+    "run": "/root/autodl-tmp/fedvade_project/reproduction_runs/round7_f01_full_repro/fine/C13",
+    "checked": [
+      {
+        "name": "epoch_300_full.pt.gz",
+        "round": 300,
+        "keys": [
+          "round",
+          "seed",
+          "server",
+          "clients",
+          "server_optimizer",
+          "client_optimizers",
+          "server_scheduler",
+          "client_schedulers",
+          "python_rng",
+          "numpy_rng",
+          "torch_rng",
+          "config",
+          "partition",
+          "partition_sizes",
+          "local_K",
+          "losses",
+          "alpha",
+          "schedule",
+          "lr",
+          "sample",
+          "rounds"
+        ]
+      }
+    ],
+    "selected_final": {
+      "path": "/root/autodl-tmp/fedvade_project/reproduction_runs/round7_f01_full_repro/fine/C13/epoch_300_full.pt.gz",
+      "original_sha256": "82f6b2edbc4383bd75069b4482983d89f40190ac45d5ae84a9b10e5373dd6e0a",
+      "export": "C13_round300.pt",
+      "export_sha256": "73ce783449ec5088a8af3079993b694612fdb71a623685e018293682b3625390",
+      "bytes": 10394713,
+      "tensor_equal": true
+    }
+  },
+  {
+    "run": "/root/autodl-tmp/fedvade_project/reproduction_runs/round15_c13_seeds_v1/runs/C13_s2",
+    "checked": [
+      {
+        "name": "best_checkpoint.pt",
+        "round": 275,
+        "keys": [
+          "round",
+          "server",
+          "selection"
+        ]
+      },
+      {
+        "name": "best_exploratory_ari_checkpoint.pt",
+        "round": 100,
+        "keys": [
+          "round",
+          "server",
+          "selection"
+        ]
+      }
+    ],
+    "selected_final": null
+  },
+  {
+    "run": "/root/autodl-tmp/fedvade_project/reproduction_runs/round14_author_default_v1/runs/AUTHOR_s0",
+    "checked": [
+      {
+        "name": "best_checkpoint.pt",
+        "round": 250,
+        "keys": [
+          "round",
+          "server",
+          "selection"
+        ]
+      },
+      {
+        "name": "best_exploratory_ari_checkpoint.pt",
+        "round": 150,
+        "keys": [
+          "round",
+          "server",
+          "selection"
+        ]
+      }
+    ],
+    "selected_final": null
+  },
+  {
+    "run": "/root/autodl-tmp/fedvade_project/reproduction_runs/round14_author_default_v1/runs/AUTHOR_s1",
+    "checked": [
+      {
+        "name": "best_checkpoint.pt",
+        "round": 250,
+        "keys": [
+          "round",
+          "server",
+          "selection"
+        ]
+      },
+      {
+        "name": "best_exploratory_ari_checkpoint.pt",
+        "round": 125,
+        "keys": [
+          "round",
+          "server",
+          "selection"
+        ]
+      }
+    ],
+    "selected_final": null
+  }
+]

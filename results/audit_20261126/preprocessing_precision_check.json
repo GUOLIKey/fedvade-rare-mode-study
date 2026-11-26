@@ -1,0 +1,9 @@
+{
+  "dataset": "fmnist_lt10",
+  "labels_equal": true,
+  "max_abs": 7.62939453125e-06,
+  "mean_abs": 1.5587685808782226e-08,
+  "n_features_different": 1943677,
+  "total_feature_values": 7840784,
+  "scope": "float32 NPZ StandardScaler versus CSV float64 StandardScaler then float32; no paired effect experiment"
+}

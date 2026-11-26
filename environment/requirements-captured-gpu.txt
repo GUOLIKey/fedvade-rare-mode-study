@@ -1,0 +1,10 @@
+# Captured server packages; fresh dependency resolution was not tested.
+# Python 3.11.18; GPU torch wheel source must be supplied when rebuilding.
+munkres==1.1.4
+numpy==1.25.2
+pandas==2.3.2
+scikit-learn==1.7.2
+scipy==1.15.3
+threadpoolctl==3.8.0
+torch==2.0.1+cu118
+tqdm==4.70.1

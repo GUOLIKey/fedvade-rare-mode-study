@@ -1,0 +1,7 @@
+group,population,training_seeds,n_training,inference_seeds_per_checkpoint,ARI_mean,between_training_SD_ddof1
+bal_clusterlet,legacy_clients,"0,1,2",3,10,0.25850644657358984,0.029621384912446796
+bal_clusterlet,unique_full,"0,1,2",3,10,0.2586341525148195,0.02985583512729229
+lt10_clusterlet,legacy_clients,"0,1,2",3,10,0.21703433734080366,0.026464474785015717
+lt10_clusterlet,unique_full,"0,1,2",3,10,0.2170170783851941,0.026179937084597517
+lt10_author,legacy_clients,"0,1,2",3,10,0.37962545254434776,0.07601527654994608
+lt10_author,unique_full,"0,1,2",3,10,0.3842597749798867,0.056701159308111065

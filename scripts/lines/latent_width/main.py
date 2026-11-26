@@ -52,7 +52,7 @@ def main():
             if not out.exists():
                 print(json.dumps({"hid_dim": width, "seed": seed}), flush=True)
                 T.run(train_args(a, out, width, seed))
-            evaluate_run(out, a.dataset, a.mode)
+            evaluate_run(out, a.dataset, a.mode, data_dir=a.data_dir)
 
     print("\n" + "=" * 66)
     print("%-10s %6s %20s" % ("hid_dim", "n", "ARI@300"))

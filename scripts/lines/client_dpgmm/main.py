@@ -88,12 +88,12 @@ def cmd_driver(a):
                 continue
             print(json.dumps({"dataset": dataset, "local_gmm": mode, "seed": a.seed}), flush=True)
             T.run(_train_args(a, out, dataset, mode))
-            evaluate_run(out, dataset, 'clusterlet')
+            evaluate_run(out, dataset, 'clusterlet', data_dir=a.data_dir)
 
 
 def cmdeval_eval(a):
     cfg = json.loads((a.run / "config.json").read_text())
-    evaluate_run(a.run, cfg["dataset"], 'clusterlet', a.seeds_inf)
+    evaluate_run(a.run, cfg["dataset"], 'clusterlet', a.seeds_inf, data_dir=a.data_dir, output=a.output)
 
 
 # --------------------------------------------------------------------------- #
@@ -131,6 +131,8 @@ def main():
 
     sp = sub.add_parser("eval")
     sp.add_argument("--run", type=Path, required=True)
+    sp.add_argument("--output", type=Path, required=True)
+    sp.add_argument("--data-dir", type=Path)
     sp.add_argument("--seeds-inf", type=int, default=10); sp.set_defaults(func=cmdeval_eval)
 
     a = p.parse_args()

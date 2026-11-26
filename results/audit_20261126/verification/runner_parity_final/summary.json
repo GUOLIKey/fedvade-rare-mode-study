@@ -1,0 +1,6 @@
+{
+  "scope": "CPU toy, seed7, 2 pretrain + 3 rounds; no research performance claim",
+  "server_tensors_equal": true,
+  "client_tensors_equal": true,
+  "max_recorded_metric_delta": 0.0
+}

@@ -1,0 +1,15 @@
+test_missing_class_positive_control (test_regressions.CoverageControls.test_missing_class_positive_control) ... ok
+test_arbitrary_data_path_is_recorded_and_verified (test_regressions.DataContract.test_arbitrary_data_path_is_recorded_and_verified) ... ok
+test_stale_author_csv_is_rejected (test_regressions.DataContract.test_stale_author_csv_is_rejected) ... ok
+test_standardize_preserves_historical_tuple_contract (test_regressions.DataContract.test_standardize_preserves_historical_tuple_contract) ... ok
+test_final_checkpoint_fallback_never_mislabels_round (test_regressions.EvaluationPopulation.test_final_checkpoint_fallback_never_mislabels_round) ... ok
+test_unique_evaluation_uses_full_data_once (test_regressions.EvaluationPopulation.test_unique_evaluation_uses_full_data_once) ... ok
+test_epoch_scheduler_changes_effective_patch (test_regressions.SchedulerAndSampling.test_epoch_scheduler_changes_effective_patch) ... ok
+test_sample_floor_rejects_impossible_budget (test_regressions.SchedulerAndSampling.test_sample_floor_rejects_impossible_budget) ... ok
+test_author_model_loaded_from_explicit_source (test_regressions.SourceIsolation.test_author_model_loaded_from_explicit_source) ... ok
+test_direct_train_help_works (test_regressions.SourceIsolation.test_direct_train_help_works) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 2.934s
+
+OK

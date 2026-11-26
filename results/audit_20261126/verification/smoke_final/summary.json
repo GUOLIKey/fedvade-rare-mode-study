@@ -1,0 +1,63 @@
+{
+  "author_a": {
+    "status": "ok",
+    "client_lr": [
+      0.0014449999999999999,
+      0.0014449999999999999
+    ],
+    "retained_K": null,
+    "n_eval": 240
+  },
+  "author_b": {
+    "status": "ok",
+    "client_lr": [
+      0.0014449999999999999,
+      0.0014449999999999999
+    ],
+    "retained_K": null,
+    "n_eval": 240
+  },
+  "epoch": {
+    "status": "ok",
+    "client_lr": [
+      0.002,
+      0.002
+    ],
+    "retained_K": null,
+    "n_eval": 240
+  },
+  "dp": {
+    "status": "ok",
+    "client_lr": [
+      0.0014449999999999999,
+      0.0014449999999999999
+    ],
+    "retained_K": {
+      "0": 2,
+      "1": 2
+    },
+    "n_eval": 240
+  },
+  "samek": {
+    "status": "ok",
+    "client_lr": [
+      0.0014449999999999999,
+      0.0014449999999999999
+    ],
+    "retained_K": {
+      "0": 2,
+      "1": 2
+    },
+    "n_eval": 240
+  },
+  "reweight": {
+    "status": "ok",
+    "client_lr": [
+      0.0014449999999999999,
+      0.0014449999999999999
+    ],
+    "retained_K": null,
+    "n_eval": 240
+  },
+  "repeated_author_weights_equal": true
+}

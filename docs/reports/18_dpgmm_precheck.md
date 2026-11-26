@@ -1,5 +1,8 @@
 # 客户端 DPGMM 预检
 
+> **2026-11-26 审核更正（优先于下方历史正文）：** 本次只完成固定上限/剪枝/表示下的预检，未跑完整训练或同K对照。不能宣称方法已失败或所有调参均无效；平均采样预算仅为风险说明，不是已识别机制。
+> 当前结论与复现边界见 [README](../../README.md) 和 [结论状态](../conclusion_status.md)。
+
 日期：2026-11-26。动机（学长建议）：用 `BayesianGaussianMixture`
 （`weight_concentration_prior_type='dirichlet_process'`）替代作者"用真实标签定 K_l"
 以及此前失败的 ACD，避免格式转换和分量爆炸。

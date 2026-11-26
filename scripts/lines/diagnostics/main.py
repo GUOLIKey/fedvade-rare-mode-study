@@ -1,4 +1,4 @@
-"""线路：丢失定位（某些类生成不出来，问题在哪一环）
+"""历史假设的诊断；旧指标不再支持“某些类生成不出来”的判断。
 
 两个子命令，对应两次诊断：
 
@@ -36,7 +36,7 @@ def _load(run: Path, data_dir: Path):
     k, loaders, (X, y), sizes, _ = D.make_clients(
         cfg["dataset"], cfg["partition_mode"], cfg["clients"], cfg["batch_size"],
         data_dir, run / "source", seed=42)
-    model = M.build_vade(state, M.hid_dim_of(cfg), cfg["alpha"], X.shape[1])
+    model = M.build_vade(state, M.hid_dim_of(cfg), cfg["alpha"], X.shape[1], source=run / "source")
     return cfg, payload, state, model, k, loaders, X.numpy(), y.numpy()
 
 
@@ -75,12 +75,13 @@ def cmd_mode_loss(a):
 
     print("\n[2] 客户端局部 GMM")
     for cid, ld in enumerate(loaders):
-        xb = torch.cat([x for x, _ in ld], 0)
-        yb = torch.cat([t for _, t in ld], 0).numpy()
+        pairs = list(ld)
+        xb = torch.cat([x for x, _ in pairs], 0)
+        yb = torch.cat([t for _, t in pairs], 0).numpy()
         held = {int(t): int((yb == t).sum()) for t in T if (yb == t).sum() > 0}
         if not held:
             continue
-        cm = M.build_vade(_client_state(a.run, cid), M.hid_dim_of(cfg), cfg["alpha"], xb.shape[1])
+        cm = M.build_vade(_client_state(a.run, cid), M.hid_dim_of(cfg), cfg["alpha"], xb.shape[1], source=a.run / "source")
         _, ca = M.responsibilities(cm, xb)
         tops = {}
         for j in range(len(cm.rho_)):
@@ -88,7 +89,7 @@ def cmd_mode_loss(a):
             if sel.sum():
                 tops[j] = int(np.bincount(yb[sel], minlength=n_cls).argmax())
         hit = {t: any(v == t for v in tops.values()) for t in held}
-        print("    client %2d (n=%4d, K=%d) 持有 %s -> 有独立分量 %s"
+        print("    client %2d (n=%4d, K=%d) 持有 %s -> 有该类主导的分量（不保证纯簇） %s"
               % (cid, len(yb), len(cm.rho_), held, hit))
 
     print("\n[3] 潜空间可分性（1-近邻纯度）")
@@ -107,7 +108,8 @@ def cmd_mode_loss(a):
     out = {"run": str(a.run), "server": rows, "placement": placement,
            "latent": {int(c): {"share": v["share"], "purity": v["purity"]} for c, v in per.items()},
            "counts": counts}
-    (a.run / "diagnosis_mode_loss.json").write_text(json.dumps(out, indent=2) + "\n")
+    from common.provenance import write_new_json
+    write_new_json(a.output, out)
 
 
 def _client_state(run: Path, cid: int):
@@ -125,7 +127,7 @@ def cmd_decoder(a):
     # autoencoder path: x -> mu -> decoder, for the server and for one client
     mu_srv = M.encode_mean(model, X)
     rec_srv = S.decode(model, mu_srv)
-    cli = M.build_vade(_client_state(a.run, 0), M.hid_dim_of(cfg), cfg["alpha"], X.shape[1])
+    cli = M.build_vade(_client_state(a.run, 0), M.hid_dim_of(cfg), cfg["alpha"], X.shape[1], source=a.run / "source")
     rec_cli = S.decode(cli, M.encode_mean(cli, X))
 
     # generation path: GMM sampling (this is what actually feeds evaluation)
@@ -171,9 +173,10 @@ def cmd_decoder(a):
         print("其余类 服务器oracle %.3f 客户端oracle %.3f"
               % (np.mean([r["server_oracle_cov"] for r in oth]),
                  np.mean([r["client_oracle_cov"] for r in oth])))
-    print("\n判读：oracle 高而采样低 -> 问题在 GMM 的分量/采样；oracle 也低 -> 解码器渲染不出")
+    print("\n历史全局tau指标：仅保存诊断，不能据此定位跨类能力瓶颈")
 
-    (a.run / "diagnosis_decoder.json").write_text(json.dumps({"tau": tau, "classes": rows}, indent=2) + "\n")
+    from common.provenance import write_new_json
+    write_new_json(a.output, {"tau": tau, "classes": rows, "status": "historical_global_tau_diagnostic_only; do not infer class capability"})
 
 
 # --------------------------------------------------------------------------- #
@@ -184,6 +187,7 @@ def main():
     for name, fn in (("mode-loss", cmd_mode_loss), ("decoder", cmd_decoder)):
         sp = sub.add_parser(name)
         sp.add_argument("--run", type=Path, required=True)
+        sp.add_argument("--output", type=Path, required=True)
         sp.add_argument("--data-dir", type=Path, default=Path("data"))
         sp.add_argument("--target-classes", type=int, nargs="+", default=[5, 8, 9])
         if name == "decoder":

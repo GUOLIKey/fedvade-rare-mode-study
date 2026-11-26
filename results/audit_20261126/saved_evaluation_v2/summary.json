@@ -1,0 +1,365 @@
+{
+  "partitions": [
+    {
+      "group": "bal_clusterlet",
+      "historical_tensors_equal": true,
+      "input_sha256": "e43bfced369fd6251571a2500fbc8a5169c7ed077255beb5831740cbbd0d3b03",
+      "labels_sha256": "a32bc073840eb9a17b4541957b094fc3ee4f7d020ed7bf6fbbbec89b886bd7b1",
+      "client_sizes": [
+        989,
+        1087,
+        1061,
+        1059,
+        985,
+        1041,
+        930,
+        939,
+        885,
+        1024
+      ],
+      "batches_per_client_per_round": [
+        5,
+        6,
+        6,
+        6,
+        5,
+        6,
+        5,
+        5,
+        5,
+        6
+      ],
+      "total_client_records": 10000,
+      "n_input": 10000
+    },
+    {
+      "group": "lt10_clusterlet",
+      "historical_tensors_equal": true,
+      "input_sha256": "e80a9054a49a6f536b42eb890ad28d90946aecc536a57e0aaf556098651b18a0",
+      "labels_sha256": "530a6f9c089cbd3d4ccb33bf7b4bdea9f7ec3f0000304688854578648907c923",
+      "client_sizes": [
+        1003,
+        1006,
+        998,
+        1002,
+        991,
+        1011,
+        995,
+        1000,
+        993,
+        1002
+      ],
+      "batches_per_client_per_round": [
+        6,
+        6,
+        5,
+        6,
+        5,
+        6,
+        5,
+        5,
+        5,
+        6
+      ],
+      "total_client_records": 10001,
+      "n_input": 10001
+    },
+    {
+      "group": "lt10_author",
+      "historical_tensors_equal": true,
+      "input_sha256": "8bbbedec18a23fcfa4211eb9e9d41adf673f4c47a1759720ec7065552e290ca9",
+      "labels_sha256": "530a6f9c089cbd3d4ccb33bf7b4bdea9f7ec3f0000304688854578648907c923",
+      "client_sizes": [
+        3842,
+        4347,
+        4919,
+        4414,
+        4701,
+        4477,
+        5444,
+        4474,
+        3641,
+        5380
+      ],
+      "batches_per_client_per_round": [
+        20,
+        22,
+        25,
+        23,
+        24,
+        23,
+        28,
+        23,
+        19,
+        27
+      ],
+      "total_client_records": 45639,
+      "n_input": 10001
+    }
+  ],
+  "evaluations": [
+    {
+      "group": "bal_clusterlet",
+      "seed": 0,
+      "population": "legacy_clients",
+      "n_evaluation": 10000,
+      "ari": 0.23380705603821447,
+      "historical_ari": 0.23380705603821447,
+      "delta_from_historical": 0.0
+    },
+    {
+      "group": "bal_clusterlet",
+      "seed": 0,
+      "population": "unique_full",
+      "n_evaluation": 10000,
+      "ari": 0.23361460745995438,
+      "historical_ari": 0.23380705603821447,
+      "delta_from_historical": -0.00019244857826009043
+    },
+    {
+      "group": "bal_clusterlet",
+      "seed": 1,
+      "population": "legacy_clients",
+      "n_evaluation": 10000,
+      "ari": 0.25036513101903923,
+      "historical_ari": 0.25036513101903923,
+      "delta_from_historical": 0.0
+    },
+    {
+      "group": "bal_clusterlet",
+      "seed": 1,
+      "population": "unique_full",
+      "n_evaluation": 10000,
+      "ari": 0.2506040208291419,
+      "historical_ari": 0.25036513101903923,
+      "delta_from_historical": 0.00023888981010267152
+    },
+    {
+      "group": "bal_clusterlet",
+      "seed": 2,
+      "population": "legacy_clients",
+      "n_evaluation": 10000,
+      "ari": 0.29134715266351585,
+      "historical_ari": 0.29134715266351585,
+      "delta_from_historical": 0.0
+    },
+    {
+      "group": "bal_clusterlet",
+      "seed": 2,
+      "population": "unique_full",
+      "n_evaluation": 10000,
+      "ari": 0.29168382925536224,
+      "historical_ari": 0.29134715266351585,
+      "delta_from_historical": 0.00033667659184638543
+    },
+    {
+      "group": "lt10_clusterlet",
+      "seed": 0,
+      "population": "legacy_clients",
+      "n_evaluation": 10001,
+      "ari": 0.20229150302251359,
+      "historical_ari": 0.20229150302251359,
+      "delta_from_historical": 0.0
+    },
+    {
+      "group": "lt10_clusterlet",
+      "seed": 0,
+      "population": "unique_full",
+      "n_evaluation": 10001,
+      "ari": 0.20237294431571415,
+      "historical_ari": 0.20229150302251359,
+      "delta_from_historical": 8.144129320056259e-05
+    },
+    {
+      "group": "lt10_clusterlet",
+      "seed": 1,
+      "population": "legacy_clients",
+      "n_evaluation": 10001,
+      "ari": 0.24758667451715938,
+      "historical_ari": 0.24758667451715938,
+      "delta_from_historical": 0.0
+    },
+    {
+      "group": "lt10_clusterlet",
+      "seed": 1,
+      "population": "unique_full",
+      "n_evaluation": 10001,
+      "ari": 0.24724222619021052,
+      "historical_ari": 0.24758667451715938,
+      "delta_from_historical": -0.0003444483269488541
+    },
+    {
+      "group": "lt10_clusterlet",
+      "seed": 2,
+      "population": "legacy_clients",
+      "n_evaluation": 10001,
+      "ari": 0.201224834482738,
+      "historical_ari": 0.201224834482738,
+      "delta_from_historical": 0.0
+    },
+    {
+      "group": "lt10_clusterlet",
+      "seed": 2,
+      "population": "unique_full",
+      "n_evaluation": 10001,
+      "ari": 0.20143606464965763,
+      "historical_ari": 0.201224834482738,
+      "delta_from_historical": 0.0002112301669196237
+    },
+    {
+      "group": "lt10_author",
+      "seed": 0,
+      "population": "legacy_clients",
+      "n_evaluation": 45639,
+      "ari": 0.37762667354948964,
+      "historical_ari": 0.37762667354948964,
+      "delta_from_historical": 0.0
+    },
+    {
+      "group": "lt10_author",
+      "seed": 0,
+      "population": "unique_full",
+      "n_evaluation": 10001,
+      "ari": 0.3873494949431105,
+      "historical_ari": 0.37762667354948964,
+      "delta_from_historical": 0.00972282139362085
+    },
+    {
+      "group": "lt10_author",
+      "seed": 1,
+      "population": "legacy_clients",
+      "n_evaluation": 45639,
+      "ari": 0.3046292768365488,
+      "historical_ari": 0.3046292768365488,
+      "delta_from_historical": 0.0
+    },
+    {
+      "group": "lt10_author",
+      "seed": 1,
+      "population": "unique_full",
+      "n_evaluation": 10001,
+      "ari": 0.32607692695318774,
+      "historical_ari": 0.3046292768365488,
+      "delta_from_historical": 0.02144765011663896
+    },
+    {
+      "group": "lt10_author",
+      "seed": 2,
+      "population": "legacy_clients",
+      "n_evaluation": 45639,
+      "ari": 0.45662040724700487,
+      "historical_ari": 0.45662040724700487,
+      "delta_from_historical": 0.0
+    },
+    {
+      "group": "lt10_author",
+      "seed": 2,
+      "population": "unique_full",
+      "n_evaluation": 10001,
+      "ari": 0.439352903043362,
+      "historical_ari": 0.45662040724700487,
+      "delta_from_historical": -0.01726750420364287
+    }
+  ],
+  "coverage": [
+    {
+      "group": "bal_clusterlet",
+      "seed": 0,
+      "historical_ratio": 1.1276,
+      "generation_mean": 1.1265382847955936,
+      "generation_sd": 0.0022548767026889707
+    },
+    {
+      "group": "bal_clusterlet",
+      "seed": 1,
+      "historical_ratio": 1.1053,
+      "generation_mean": 1.1083904812807726,
+      "generation_sd": 0.0024556501513821696
+    },
+    {
+      "group": "bal_clusterlet",
+      "seed": 2,
+      "historical_ratio": 1.1058,
+      "generation_mean": 1.1068027060312107,
+      "generation_sd": 0.001643445175341193
+    },
+    {
+      "group": "lt10_clusterlet",
+      "seed": 0,
+      "historical_ratio": 1.1843,
+      "generation_mean": 1.1857208761443474,
+      "generation_sd": 0.0010207488817399015
+    },
+    {
+      "group": "lt10_clusterlet",
+      "seed": 1,
+      "historical_ratio": 1.1706,
+      "generation_mean": 1.170272233748357,
+      "generation_sd": 0.0008697442968547737
+    },
+    {
+      "group": "lt10_clusterlet",
+      "seed": 2,
+      "historical_ratio": 1.1972,
+      "generation_mean": 1.1994187049762581,
+      "generation_sd": 0.0037938256290266136
+    },
+    {
+      "group": "lt10_author",
+      "seed": 0,
+      "historical_ratio": 1.0004,
+      "generation_mean": 1.003765452195915,
+      "generation_sd": 0.002527202838506685
+    },
+    {
+      "group": "lt10_author",
+      "seed": 1,
+      "historical_ratio": 1.0102,
+      "generation_mean": 1.0108451755787478,
+      "generation_sd": 0.002103969969953964
+    },
+    {
+      "group": "lt10_author",
+      "seed": 2,
+      "historical_ratio": 1.0156,
+      "generation_mean": 1.0172411311278722,
+      "generation_sd": 0.00320993148154467
+    },
+    {
+      "group": "hid20",
+      "seed": 0,
+      "generation_mean": 1.1401382106831235,
+      "generation_sd": 0.00306241523609249
+    },
+    {
+      "group": "hid20",
+      "seed": 1,
+      "generation_mean": 1.1019829751084458,
+      "generation_sd": 0.0015627597155028
+    },
+    {
+      "group": "hid20",
+      "seed": 2,
+      "generation_mean": 1.07522630851439,
+      "generation_sd": 0.0016997082939102057
+    },
+    {
+      "group": "hid30",
+      "seed": 0,
+      "generation_mean": 1.1305211401950486,
+      "generation_sd": 0.0059531931124027285
+    },
+    {
+      "group": "hid30",
+      "seed": 1,
+      "generation_mean": 1.0979829900282223,
+      "generation_sd": 0.002487402246004561
+    },
+    {
+      "group": "hid30",
+      "seed": 2,
+      "generation_mean": 1.1288913066098387,
+      "generation_sd": 0.0023919640874594653
+    }
+  ]
+}

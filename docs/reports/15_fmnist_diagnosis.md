@@ -1,10 +1,14 @@
 # 5/8/9 类丢失的位置诊断（不训练）
 
+> **2026-11-26 审核更正（优先于下方历史正文）：** “编码器不是瓶颈”“不是没采到”和分量分配导致生成损失均未被干预识别。oracle覆盖率同样受旧全局阈值影响，不能定位解码器瓶颈。已存档的旧diagnose_loss.py与整理版都曾分两次遍历shuffle loader取x/y，局部多数类诊断不可靠；当时执行版本未另绑定源码哈希。修复版已一次遍历配对，新输出单独保存。
+> 当前结论与复现边界见 [README](../../README.md) 和 [结论状态](../conclusion_status.md)。
+
 > **⚠ 本报告的结论已被更正，请勿引用。**
 >
 > 本报告中的"某些类被生成模型系统性丢弃"来自当时使用的覆盖率指标，该指标采用全局统一阈值，
-> 对类内散布大的类系统性不利。修正后的 size-matched 指标显示该结论不成立，
-> 详见 [`16_correction.md`](16_correction.md)。原报告保留原样，用于记录当时的推理过程。
+> 对类内散布大的类系统性不利，因此旧证据不能支持此前断言。新size-matched指标也不能排除缺类，
+> 见 [`21_metric_missing_class_control.md`](21_metric_missing_class_control.md)；实际模型是否丢类仍未知。
+> 原报告正文保留，用于记录当时的推理过程。
 
 2026-11-26。对象：`bal_clusterlet/s0` 与 `lt10_clusterlet/s0` 的第 300 轮 checkpoint。
 脚本：`scripts/diagnose_loss.py`（只读）。产物：各 run 目录下的 `diagnosis.json`。

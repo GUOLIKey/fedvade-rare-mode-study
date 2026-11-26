@@ -14,6 +14,7 @@ import torch
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from torch.utils.data import DataLoader, TensorDataset
+from .provenance import author_module, dataset_file
 
 CACHE_NAME = "cache"
 
@@ -80,7 +81,7 @@ def make_long_tailed(X, y, rho, n_target=10000, seed=0):
 def standardize(X, ref=None):
     sc = StandardScaler().fit(X)
     out = sc.transform(X).astype(np.float32)
-    return out if ref is None else (out, sc.transform(ref).astype(np.float32))
+    return out, None if ref is None else sc.transform(ref).astype(np.float32)
 
 
 def build_dataset(data_dir, name, rho, n_target=10000, seed=0) -> Path:
@@ -167,9 +168,15 @@ def _loader(X, y, batch_size):
 
 
 def _author_csv_once(X, y, path: Path):
-    if path.exists():
-        return path
     import pandas as pd
+    if path.exists():
+        cached = pd.read_csv(path).to_numpy()
+        if (cached.shape != (len(y), X.shape[1]+1)
+                or not np.array_equal(cached[:, -1], y)
+                or not np.allclose(cached[:, :-1], X, rtol=0, atol=1e-12)):
+            raise ValueError('cached author CSV does not match the selected raw subset: %s' % path)
+        return path
+    path.parent.mkdir(parents=True, exist_ok=True)
     cols = ["f%d" % i for i in range(X.shape[1])] + ["class"]
     df = pd.DataFrame(np.column_stack([X.astype(np.float64), y.astype(np.int64)]), columns=cols)
     df["class"] = y.astype(np.int64)
@@ -183,6 +190,14 @@ def make_clients(dataset, mode, n_clients, batch_size, data_dir, source_copy, se
     mode = 'clusterlet' : zero sample overlap, features standardised on the subset
     mode = 'author'     : the author's own make_noniid_clients on a CSV of the same subset
     """
+    path = dataset_file(data_dir, dataset)
+    if path.suffix == '.csv':
+        if mode != 'author':
+            raise ValueError('UCI CSV inputs require author mode')
+        module = author_module(source_copy, 'dataloader')
+        k, loaders, full, sizes = module.make_noniid_clients(
+            str(path), n_clients, batch_size, dataset, seed=seed)
+        return k, loaders, full, [int(s) for s in sizes], {'mode': 'author', 'input_csv': str(path)}
     X, y = load_dataset(data_dir, dataset)
     k = int(len(np.unique(y)))
 
@@ -198,10 +213,10 @@ def make_clients(dataset, mode, n_clients, batch_size, data_dir, source_copy, se
 
     if mode == "author":
         csv = _author_csv_once(X, y, Path(data_dir) / CACHE_NAME / (dataset + ".csv"))
-        from dataloader import make_noniid_clients        # author module on sys.path
-        k2, loaders, (Xt, yt), sizes = make_noniid_clients(
+        module = author_module(source_copy, 'dataloader')
+        k2, loaders, (Xt, yt), sizes = module.make_noniid_clients(
             str(csv), n_clients, batch_size, dataset, seed=seed)
-        return k2, loaders, (Xt, yt), [int(s) for s in sizes], {"mode": "author"}
+        return k2, loaders, (Xt, yt), [int(s) for s in sizes], {"mode": "author", 'input_csv':str(csv)}
 
     raise ValueError("unknown mode: %r" % mode)
 

@@ -1,0 +1,116 @@
+{
+  "tau": 12.97055721282959,
+  "classes": [
+    {
+      "class": 0,
+      "n": 1000,
+      "server_recon_mse": 261.1959,
+      "client_recon_mse": 261.0397,
+      "classmean_recon_mse": 512.2186,
+      "server_oracle_cov": 0.417,
+      "client_oracle_cov": 0.418,
+      "sampled_coverage_global_tau": 0.245,
+      "is_target": false
+    },
+    {
+      "class": 1,
+      "n": 1000,
+      "server_recon_mse": 160.7169,
+      "client_recon_mse": 160.6067,
+      "classmean_recon_mse": 258.1232,
+      "server_oracle_cov": 0.7,
+      "client_oracle_cov": 0.7,
+      "sampled_coverage_global_tau": 0.532,
+      "is_target": false
+    },
+    {
+      "class": 2,
+      "n": 1000,
+      "server_recon_mse": 231.1157,
+      "client_recon_mse": 231.0256,
+      "classmean_recon_mse": 527.8785,
+      "server_oracle_cov": 0.404,
+      "client_oracle_cov": 0.404,
+      "sampled_coverage_global_tau": 0.283,
+      "is_target": false
+    },
+    {
+      "class": 3,
+      "n": 1000,
+      "server_recon_mse": 173.3218,
+      "client_recon_mse": 173.2922,
+      "classmean_recon_mse": 336.0911,
+      "server_oracle_cov": 0.602,
+      "client_oracle_cov": 0.602,
+      "sampled_coverage_global_tau": 0.389,
+      "is_target": false
+    },
+    {
+      "class": 4,
+      "n": 1000,
+      "server_recon_mse": 199.711,
+      "client_recon_mse": 199.6333,
+      "classmean_recon_mse": 427.7247,
+      "server_oracle_cov": 0.548,
+      "client_oracle_cov": 0.548,
+      "sampled_coverage_global_tau": 0.338,
+      "is_target": false
+    },
+    {
+      "class": 5,
+      "n": 1000,
+      "server_recon_mse": 350.3456,
+      "client_recon_mse": 350.0286,
+      "classmean_recon_mse": 495.1007,
+      "server_oracle_cov": 0.146,
+      "client_oracle_cov": 0.147,
+      "sampled_coverage_global_tau": 0.121,
+      "is_target": true
+    },
+    {
+      "class": 6,
+      "n": 1000,
+      "server_recon_mse": 288.2122,
+      "client_recon_mse": 288.0433,
+      "classmean_recon_mse": 599.8192,
+      "server_oracle_cov": 0.498,
+      "client_oracle_cov": 0.499,
+      "sampled_coverage_global_tau": 0.412,
+      "is_target": false
+    },
+    {
+      "class": 7,
+      "n": 1000,
+      "server_recon_mse": 189.3862,
+      "client_recon_mse": 189.0906,
+      "classmean_recon_mse": 286.6767,
+      "server_oracle_cov": 0.431,
+      "client_oracle_cov": 0.433,
+      "sampled_coverage_global_tau": 0.308,
+      "is_target": false
+    },
+    {
+      "class": 8,
+      "n": 1000,
+      "server_recon_mse": 776.8863,
+      "client_recon_mse": 776.6544,
+      "classmean_recon_mse": 1173.6991,
+      "server_oracle_cov": 0.03,
+      "client_oracle_cov": 0.03,
+      "sampled_coverage_global_tau": 0.013,
+      "is_target": true
+    },
+    {
+      "class": 9,
+      "n": 1000,
+      "server_recon_mse": 454.708,
+      "client_recon_mse": 454.4973,
+      "classmean_recon_mse": 674.2993,
+      "server_oracle_cov": 0.131,
+      "client_oracle_cov": 0.131,
+      "sampled_coverage_global_tau": 0.029,
+      "is_target": true
+    }
+  ],
+  "status": "historical_global_tau_diagnostic_only; do not infer class capability"
+}

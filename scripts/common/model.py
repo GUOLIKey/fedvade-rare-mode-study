@@ -7,9 +7,10 @@ import numpy as np
 import torch
 
 
-def build_vade(state: dict, hid_dim: int, alpha: float, input_dim: int):
+def build_vade(state: dict, hid_dim: int, alpha: float, input_dim: int, source=None):
     """Instantiate the author's VaDE with the shapes found in `state`."""
-    from model import VaDE  # author module, on sys.path
+    from .provenance import author_module
+    VaDE = author_module(source, 'model').VaDE
     m = VaDE(SimpleNamespace(input_dim=int(input_dim), hid_dim=int(hid_dim),
                              nClusters=len(state["rho_"]), alpha=float(alpha),
                              cuda=False))

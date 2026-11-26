@@ -1,0 +1,286 @@
+{
+  "measured_on": "2026-11-26",
+  "historical_execution_not_implied": true,
+  "files": [
+    {
+      "path": "experiments/fmnist_clusterlets_v1/data/cache/fmnist_bal.npz",
+      "bytes": 6480563,
+      "sha256": "6d02c3c9342e54790934b97957c093afa0a31fb26130e920ef11a6d3de54478a",
+      "final_checkpoint": false,
+      "data": true,
+      "lightweight": false
+    },
+    {
+      "path": "experiments/fmnist_clusterlets_v1/data/cache/fmnist_lt10.csv",
+      "bytes": 90669489,
+      "sha256": "fef0c487473d629e5370ba775f8e55d819918a3c84288bdabedf163547608293",
+      "final_checkpoint": false,
+      "data": true,
+      "lightweight": false
+    },
+    {
+      "path": "experiments/fmnist_clusterlets_v1/data/cache/fmnist_lt10.npz",
+      "bytes": 6577736,
+      "sha256": "181f0d0dc7e402945261857a35f77261431cc1eecf9ef780744403fb246c7b17",
+      "final_checkpoint": false,
+      "data": true,
+      "lightweight": false
+    },
+    {
+      "path": "experiments/fmnist_clusterlets_v1/data/cache/fmnist_lt50.npz",
+      "bytes": 6614838,
+      "sha256": "f3cc69560bf295a6a1d6063a6f61dd04db93c1f77c2c40ebe0a25aae67b02c50",
+      "final_checkpoint": false,
+      "data": true,
+      "lightweight": false
+    },
+    {
+      "path": "experiments/fmnist_clusterlets_v1/runs/bal_clusterlet/s0/last_checkpoint.pt",
+      "bytes": 147506939,
+      "sha256": "af94e7b8bdcd399ccee76984b2288956b4496127d79b44ae6dac4d4567159b8d",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "experiments/fmnist_clusterlets_v1/runs/bal_clusterlet/s1/last_checkpoint.pt",
+      "bytes": 147506939,
+      "sha256": "5b18465911149365b76b2be7d3f4cba9f285ecd9a51cbce246ec4f856d5535da",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "experiments/fmnist_clusterlets_v1/runs/bal_clusterlet/s2/last_checkpoint.pt",
+      "bytes": 147506939,
+      "sha256": "a43d42d79b62de479b2f312e1395be5d462eec752d574395280808dc92193f5b",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "experiments/fmnist_clusterlets_v1/runs/lt10_author/s0/last_checkpoint.pt",
+      "bytes": 147510779,
+      "sha256": "f15cadd3c3fe62705fc7ca81d9610dc3c12ae46d37e29ed666b45395a40b501c",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "experiments/fmnist_clusterlets_v1/runs/lt10_author/s1/last_checkpoint.pt",
+      "bytes": 147510779,
+      "sha256": "9f8a69daca0677423f8d6bc78bdddce409135f81672cfb5f6f447fbd58cda0ca",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "experiments/fmnist_clusterlets_v1/runs/lt10_author/s2/last_checkpoint.pt",
+      "bytes": 147510779,
+      "sha256": "75439dfab2a103ccc54841676beb64c82083092bbcd54303969c338b5193068d",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "experiments/fmnist_clusterlets_v1/runs/lt10_clusterlet/s0/last_checkpoint.pt",
+      "bytes": 147507067,
+      "sha256": "9924adbf3ab8d680da7624cb078f04fd10e37efdb33e37c2fb526c8483a07a76",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "experiments/fmnist_clusterlets_v1/runs/lt10_clusterlet/s1/last_checkpoint.pt",
+      "bytes": 147507067,
+      "sha256": "fe5127645c80282a9be6409dd6fe29a4bc0ee417e88ec47c0badf1c04eaa904e",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "experiments/fmnist_clusterlets_v1/runs/lt10_clusterlet/s2/last_checkpoint.pt",
+      "bytes": 147507067,
+      "sha256": "3351892c413f8bbdd0a06b90f1b4b3d9e3eab984a7bbf5a2b63f187dd1acd4d7",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "experiments/fmnist_clusterlets_v1/runs_hiddim/hid20/s0/last_checkpoint.pt",
+      "bytes": 150151675,
+      "sha256": "bd0653f4c0f6241e2ea1b1fd7fdcaefa4219ac779e8dcafbe95e987b623773c1",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "experiments/fmnist_clusterlets_v1/runs_hiddim/hid20/s1/last_checkpoint.pt",
+      "bytes": 150151675,
+      "sha256": "8504145e41785f2815f9f2ba6635b102980fab764b298268d3b029154b16f90c",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "experiments/fmnist_clusterlets_v1/runs_hiddim/hid20/s2/last_checkpoint.pt",
+      "bytes": 150151675,
+      "sha256": "01140bcdf2db572eaca3d72e3bbb4f262a8c669e62457ce2bf1a1fd16602ed14",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "experiments/fmnist_clusterlets_v1/runs_hiddim/hid30/s0/last_checkpoint.pt",
+      "bytes": 152796347,
+      "sha256": "40e12037bd0ff5313a2a8eaf280a53d031433f54bb9c95aea9e41f2473364fa0",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "experiments/fmnist_clusterlets_v1/runs_hiddim/hid30/s1/last_checkpoint.pt",
+      "bytes": 152796347,
+      "sha256": "31c4245e73ec58b77e462827bc1dc63a96a425e419d11076b1a4d6fb674525e5",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "experiments/fmnist_clusterlets_v1/runs_hiddim/hid30/s2/last_checkpoint.pt",
+      "bytes": 152796347,
+      "sha256": "d10ac51793508f6d2438305267cfcc2514af505bf1d60d73d96bfd5712f44a6e",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "reproduction_runs/round15_c13_seeds_v1/runs/C13_s1/last_checkpoint.pt",
+      "bytes": 343083135,
+      "sha256": "9057ee3c294e2efa634a177886cb9c698e74daf1558a73b7cc6c86586c312e05",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "reproduction_runs/round16_ablation_v1/runs/B0_a01_p50_author_s2/last_checkpoint.pt",
+      "bytes": 343083135,
+      "sha256": "fe9c68e85d3de4c6e6cfc4619ea67b87040e6ec064e4ab9f8b32ade871312cd7",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "reproduction_runs/round16_ablation_v1/runs/B2_a01_p05_author_s0/last_checkpoint.pt",
+      "bytes": 343083135,
+      "sha256": "a47a8984a060461e0b827609822f32cab268557bd454e20277fcae10a0b96bce",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "reproduction_runs/round16_ablation_v1/runs/B2_a01_p05_author_s1/last_checkpoint.pt",
+      "bytes": 343083135,
+      "sha256": "5326e95692ca6b18bd0d745435d34b8c7b97392e0f147b402a6fd65c6218f8d5",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "reproduction_runs/round16_ablation_v1/runs/B2_a01_p05_author_s2/last_checkpoint.pt",
+      "bytes": 343083135,
+      "sha256": "bd1d3fcd50dbb47f54e286c431745307dea777bdb9fad493c180bcfc7abf0edc",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "reproduction_runs/round16_ablation_v1/runs/B3_a01_p50_epoch_s0/last_checkpoint.pt",
+      "bytes": 343083135,
+      "sha256": "de1ea6e7b728ac19715d2393488148230a343e0ceaf55be8956abb4d9551d507",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "reproduction_runs/round16_ablation_v1/runs/B3_a01_p50_epoch_s1/last_checkpoint.pt",
+      "bytes": 343083135,
+      "sha256": "b4861ba82da3bc9d9f5792e5f803b1bc50f84b0fcff64a8f5faa0f478c4e4b8e",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "reproduction_runs/round16_ablation_v1/runs/B3_a01_p50_epoch_s2/last_checkpoint.pt",
+      "bytes": 343083135,
+      "sha256": "0809324d6998985d2379e235c631c7777c675fdb97b999152bba223ba3008e3d",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "reproduction_runs/round16_ablation_v1/runs/B4_a05_p05_author_s0/last_checkpoint.pt",
+      "bytes": 343083135,
+      "sha256": "55af4bef861f36851b8e57cfa2ec2cd1f6a0a96ed97b82ac0eabd202fe6ff9d7",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "reproduction_runs/round16_ablation_v1/runs/B4_a05_p05_author_s1/last_checkpoint.pt",
+      "bytes": 343083135,
+      "sha256": "f09100af1215b8bfcdd31f1e3b0d32c444d69c62409a7111407691cb93959041",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "reproduction_runs/round16_ablation_v1/runs/B4_a05_p05_author_s2/last_checkpoint.pt",
+      "bytes": 343083135,
+      "sha256": "42427a492040dbb570b779962c289abfd5b660a4dcec8bf16a985e5b5e484f07",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    },
+    {
+      "path": "fuxian-round2/FedVaDE_source/dataloader.py",
+      "bytes": 1629,
+      "sha256": "28fc737a243ea550dc4c18ec98928a51af2701132452c68d1e7ef0d1db9c9cad",
+      "final_checkpoint": false,
+      "data": false,
+      "lightweight": true
+    },
+    {
+      "path": "fuxian-round2/FedVaDE_source/experiment.py",
+      "bytes": 1924,
+      "sha256": "979739dacb8950e074d8cbc775722aaa5ff8c304a1dba13efc64d97d9da4d758",
+      "final_checkpoint": false,
+      "data": false,
+      "lightweight": true
+    },
+    {
+      "path": "fuxian-round2/FedVaDE_source/main.py",
+      "bytes": 8533,
+      "sha256": "33bd9927437c444f3f5355813dba8de1896fd59e2eb3fbd9f16960ff3041b87b",
+      "final_checkpoint": false,
+      "data": false,
+      "lightweight": true
+    },
+    {
+      "path": "fuxian-round2/FedVaDE_source/model.py",
+      "bytes": 12082,
+      "sha256": "6cdef32b831d090ee79fa952a6f55386bba2e37a6c0c38d6ebc865441c1379d9",
+      "final_checkpoint": false,
+      "data": false,
+      "lightweight": true
+    },
+    {
+      "path": "fuxian-round2/FedVaDE_source/model/server_model_breast_cancer.pk",
+      "bytes": 10395803,
+      "sha256": "168ad5a4cd619ccee527a4a6c4a6816d35166e3a6bb6bc70b4bbbaa838c2ea85",
+      "final_checkpoint": true,
+      "data": false,
+      "lightweight": false
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "evaluation_exports_verified": 27,
+  "bytes": 328066023,
+  "bad": [],
+  "scope": "server-model evaluation states only; original full checkpoints remain on server",
+  "extra_reference_export_verified": [
+    {
+      "file": "/Users/cheeseowl/Desktop/\u79d1\u7814/fuxian/reproduction_runs/audit_repair_20261126/backups/reference_final_exports/C13_round300.pt",
+      "verified": true
+    }
+  ],
+  "fmnist_caches": [
+    {
+      "path": "/Users/cheeseowl/Desktop/\u79d1\u7814/fuxian/reproduction_runs/audit_repair_20261126/backups/fmnist_cache/fmnist_bal.npz",
+      "verified": true
+    },
+    {
+      "path": "/Users/cheeseowl/Desktop/\u79d1\u7814/fuxian/reproduction_runs/audit_repair_20261126/backups/fmnist_cache/fmnist_lt10.npz",
+      "verified": true
+    },
+    {
+      "path": "/Users/cheeseowl/Desktop/\u79d1\u7814/fuxian/reproduction_runs/audit_repair_20261126/backups/fmnist_cache/fmnist_lt50.npz",
+      "verified": true
+    }
+  ],
+  "historical_originals": {
+    "checked": 1515,
+    "mismatches": [],
+    "scope": "Historical experiment/reproduction/source files; no NNDL or environment traversal",
+    "all_original_manifest_files_unchanged": true
+  },
+  "existing_full_baseline": {
+    "mac_baseline": "/Users/cheeseowl/Desktop/\u79d1\u7814/fuxian/model_backups/BASELINE_C13_s1_round300.pt",
+    "sha256": "9057ee3c294e2efa634a177886cb9c698e74daf1558a73b7cc6c86586c312e05",
+    "server_original_matches": true
+  }
+}

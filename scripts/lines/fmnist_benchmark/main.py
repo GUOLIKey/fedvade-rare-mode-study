@@ -9,9 +9,9 @@
   eval      对已有 run 计算 Global ARI / Purity / NMI（10 个推理种子）
 
 用法
-  python lines/line_fmnist_benchmark.py prepare --data-dir data
-  python lines/line_fmnist_benchmark.py check   --data-dir data --dataset fmnist_bal
-  python lines/line_fmnist_benchmark.py driver  --source ../FedVaDE_source --data-dir data
+  python lines/fmnist_benchmark/main.py prepare --data-dir data
+  python lines/fmnist_benchmark/main.py check   --data-dir data --dataset fmnist_bal
+  python lines/fmnist_benchmark/main.py driver  --source ../FedVaDE_source --data-dir data
 """
 from __future__ import annotations
 
@@ -102,7 +102,7 @@ def cmd_driver(a):
                     "--dataset", dataset, "--mode", mode, "--seed", str(seed),
                     "--rounds", str(a.rounds), "--device", a.device])
                 T.run(args)
-            evaluate(out, dataset, mode, a.seeds_inf)
+            evaluate(out, dataset, mode, a.seeds_inf, a.data_dir)
     summarize(out_root)
 
 
@@ -111,11 +111,11 @@ def cmdeval_eval(a):
     if dataset is None or mode is None:
         cfg = json.loads((a.run / "config.json").read_text())
         dataset, mode = cfg["dataset"], cfg["partition_mode"]
-    evaluate(a.run, dataset, mode, a.seeds_inf)
+    evaluate(a.run, dataset, mode, a.seeds_inf, a.data_dir, a.output)
 
 
-def evaluate(run: Path, dataset, mode, n_inference):
-    out = evaluate_run(run, dataset, mode, n_inference)
+def evaluate(run: Path, dataset, mode, n_inference, data_dir, output=None):
+    out = evaluate_run(run, dataset, mode, n_inference, data_dir=data_dir, output=output)
     if "300" in out["rounds"]:
         print("%-28s %-4s ARI@300 = %.4f" % (run.parent.name, run.name,
               out["rounds"]["300"]["ari"]["mean"]))
@@ -176,7 +176,9 @@ def main():
 
     sp = sub.add_parser("eval")
     sp.add_argument("--run", type=Path, required=True)
+    sp.add_argument("--output", type=Path, required=True)
     sp.add_argument("--dataset", default=None); sp.add_argument("--mode", default=None)
+    sp.add_argument("--data-dir", type=Path)
     sp.add_argument("--seeds-inf", type=int, default=10); sp.set_defaults(func=cmdeval_eval)
 
     a = p.parse_args()

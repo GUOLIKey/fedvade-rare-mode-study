@@ -1,0 +1,20 @@
+[
+  {
+    "claim": "C13_s1_ARI300",
+    "value": 0.6381353876540139,
+    "source": "reproduction_runs/round15_c13_seeds_v1/runs/C13_s1/evaluation_summary.json",
+    "status": "historical evaluator; metadata training_seed conflict"
+  },
+  {
+    "claim": "C13_s1_inference_SD300",
+    "value": 0.007297630103858551,
+    "source": "reproduction_runs/round15_c13_seeds_v1/runs/C13_s1/evaluation_summary.json",
+    "status": "original numeric output recovered; summary seed field=0 vs config=1"
+  },
+  {
+    "claim": "B4_sample_SD300",
+    "value": 0.010498730081935278,
+    "source": "docs/reports/07_ablation.md displayed per-seed values",
+    "status": "recomputed from rounded displayed values"
+  }
+]

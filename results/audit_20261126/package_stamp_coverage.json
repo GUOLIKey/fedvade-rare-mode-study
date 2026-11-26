@@ -1,0 +1,109 @@
+{
+  "schema": "coverage_audit_v1",
+  "run": "/root/autodl-tmp/fedvade_project/reproduction_runs/audit_repair_20261126/runner_parity_final/repaired",
+  "training_seed": 7,
+  "repair_package": {
+    "package_sha256": "a7689e07ed13cb864046f43fc22ea38ab11e51bc68df0ee3789e9182b18493dd",
+    "files": {
+      "common/__init__.py": "4d69be6dc90ff247a8d20dda803a0fd814b373eb649131587cb1101f34676181",
+      "common/data.py": "4a87f98d6e5719cc5d5151f09b2906990edef9bd788942909c487e1fde6c7760",
+      "common/distances.py": "3dfeb4a732c4466dcd2284a7f542f4befd30c9108ed692a0974766cb4e53060c",
+      "common/evaluate.py": "16410d3a6505b929956e7511e81af2083541b9832980338938e45deabd3e9483",
+      "common/local_gmm.py": "7169804e932dbbabbd03d80948dfed1bdbeddc544195e07595b440ca9f258e4d",
+      "common/metrics.py": "81408e31d88a04414d2157ad4d083f2933c361f23625afa4f7a25d2c0c091c9b",
+      "common/model.py": "78024b2d462c8393190101516e7ac17ec1a173370f796a7594310cd53bec0e69",
+      "common/provenance.py": "f9fa8ef2638546e209bdbe06e9e3f202656e3990d2aef859893eec7f02425285",
+      "common/sampling.py": "c037541dfa8bd2503d423eb828460c79a91d600ea3b6ba10bba2ceb606d24374",
+      "common/train.py": "35bf8c2854173def22deeb789ad5a282e9c22c332d7dee5847f50ad6fbd097ab",
+      "lines/client_acd/main.py": "8b7c7ad237e75a95cb81acc560879c730006a1a8c06521a537fab3ccd4d095f3",
+      "lines/client_dpgmm/main.py": "ef6c46e802f0c1b05705889bd996737d028db6ed0407d21dbf0d9fba7e4edf44",
+      "lines/coverage_metric/main.py": "5051e9c0db8b723a78654d1075bb008fcbbd477734ebf0702f6af00030902518",
+      "lines/diagnostics/main.py": "695d5f8ac430bba1bc6634958fd61b0c92325b9e816b5b7cf1cffc0d8dccfbac",
+      "lines/fmnist_benchmark/main.py": "0842bf2cd784c8ca2dd5694cfce3bd1fd9de108aaa39b7223c787fe3165f7234",
+      "lines/latent_width/main.py": "885aedb6922391baaf134fa8f841fa6229b169542ec6c56f5af3d5aac5bd4733",
+      "lines/server_multica/main.py": "b63ba728f6c86034ffc0b14bf6085e2ba3c966d437508ae21afaa288f5713e81",
+      "lines/server_reweight/main.py": "8873088e4d48eb0302febc70e488bec0c9db7ae4cf6d77198c7ca9520d93ac64"
+    }
+  },
+  "runtime_packages": {
+    "torch": "2.0.1+cu118",
+    "numpy": "1.25.2",
+    "scikit-learn": "1.7.2",
+    "scipy": "1.15.3",
+    "pandas": "2.3.2",
+    "munkres": "1.1.4",
+    "threadpoolctl": "3.8.0"
+  },
+  "generation_seeds": [
+    0,
+    1
+  ],
+  "split_seeds": [
+    0
+  ],
+  "input_sha256": "5b8e877bb8b4703af297052a960ca6902be780da96ce4f906b3e8b8e8b9c1c56",
+  "label_sha256": "0c52fd844b45cd581cf27b3e22a1d8028f8f5aa70e1bb764b8186d241aebc6c7",
+  "checkpoint_sha256": "9d9d69786626d8c581aef52663cc60e86cdc6019e935af40153742498f54bc35",
+  "data_dir": "/root/autodl-tmp/fedvade_project/reproduction_runs/audit_repair_20261126/runner_parity_final/data",
+  "controls": {
+    "identity_pass": true,
+    "missing_class_pass": true,
+    "missing_class_ratio": 80.0062484741211,
+    "scope": "synthetic separated classes only; not full validation on real data"
+  },
+  "draws": [
+    {
+      "overall_ratio": 3.7742354529102666,
+      "per_class": [
+        {
+          "class": 0,
+          "n_query": 60,
+          "median_d_real": 0.20202265679836273,
+          "median_d_gen": 1.1933828592300415,
+          "ratio": 5.907173374227762
+        },
+        {
+          "class": 1,
+          "n_query": 60,
+          "median_d_real": 0.21586614847183228,
+          "median_d_gen": 0.5003229230642319,
+          "ratio": 2.317746096857412
+        }
+      ],
+      "n_ref": 120,
+      "n_query": 120,
+      "n_gen": 120,
+      "split_seed": 0,
+      "generation_seed": 0,
+      "self_check": false
+    },
+    {
+      "overall_ratio": 3.8941438502208743,
+      "per_class": [
+        {
+          "class": 0,
+          "n_query": 60,
+          "median_d_real": 0.20202265679836273,
+          "median_d_gen": 1.2431744933128357,
+          "ratio": 6.153638968096725
+        },
+        {
+          "class": 1,
+          "n_query": 60,
+          "median_d_real": 0.21586614847183228,
+          "median_d_gen": 0.4574994444847107,
+          "ratio": 2.1193663190058185
+        }
+      ],
+      "n_ref": 120,
+      "n_query": 120,
+      "n_gen": 120,
+      "split_seed": 0,
+      "generation_seed": 1,
+      "self_check": false
+    }
+  ],
+  "overall_mean": 3.8341896515655707,
+  "overall_sd_ddof0": 0.059954198655303825,
+  "note": "Within one training run; no pooling with between-training-seed uncertainty."
+}

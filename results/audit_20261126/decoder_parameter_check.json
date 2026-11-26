@@ -1,0 +1,7 @@
+{
+  "run": "bal_clusterlet/s0",
+  "server_client0_decoder_equal": false,
+  "max_abs_parameter_difference": 2.987496554851532e-05,
+  "client_decoders_equal": true,
+  "scope": "parameter equality only; not a causal generation-quality test"
+}

@@ -20,13 +20,20 @@ import platform
 import random
 import shutil
 import sys
+import os
+import subprocess
 from pathlib import Path
 from time import perf_counter
 from unittest.mock import patch
 
 import numpy as np
 
+if __package__ in (None, ''):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    __package__ = 'common'
+
 from . import data as data_mod
+from .provenance import dataset_file, sha256, array_sha256, source_hashes, script_fingerprint, runtime_versions
 
 
 def _sha(path) -> str:
@@ -85,6 +92,14 @@ def instrument_main(source: str, pretrain: int) -> str:
     return source
 
 
+def patch_schedule(source, schedule):
+    if schedule == 'author':
+        return source
+    source = _once(source, "                    c['lr_s'].step()\n", '')
+    return _once(source, "                clients_vae_param.append(c['vade'].state_dict())",
+                 "                c['lr_s'].step()\n                clients_vae_param.append(c['vade'].state_dict())")
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="Run one FedVaDE configuration.")
     p.add_argument("--source", type=Path, required=True, help="path to FedVaDE_source")
@@ -107,14 +122,36 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--clients", type=int, default=10)
     p.add_argument("--hid-dim", type=int, default=10)
     p.add_argument("--device", choices=("cpu", "cuda"), default="cuda")
+    p.add_argument('--sample-floor', type=int, default=0)
+    p.add_argument('--usage-floor', type=float, default=0.)
+    p.add_argument('--usage-beta', type=float, default=4.)
     p.add_argument("--dump-pretrain", type=Path, default=None,
                    help="save each client's local_mu after pretraining and stop")
     return p
 
 
 def run(args) -> None:
+    """One clean interpreter per run; no author-module/cache leakage."""
+    args.source, args.out, args.data_dir = args.source.resolve(), args.out.resolve(), args.data_dir.resolve()
+    if args.dump_pretrain is not None:
+        args.dump_pretrain = args.dump_pretrain.resolve()
+    argv = []
+    for key, value in vars(args).items():
+        if value is not None:
+            argv.extend(['--'+key.replace('_','-'), str(value)])
+    env = os.environ.copy()
+    env['PYTHONPATH'] = str(Path(__file__).resolve().parents[1]) + os.pathsep + env.get('PYTHONPATH', '')
+    env['PYTHONDONTWRITEBYTECODE'] = '1'
+    subprocess.run([sys.executable, '-m', 'common.train', *argv], env=env, check=True)
+
+
+def _run_in_process(args) -> None:
     src, out = args.source.resolve(), args.out.resolve()
     data_dir = args.data_dir.resolve()
+    if args.rounds < 1 or args.pretrain < 1 or args.sample < 1 or args.clients < 1:
+        raise ValueError('rounds, pretrain, sample and clients must be positive')
+    if args.sample_floor < 0 or not 0 <= args.usage_floor <= 1 or args.usage_beta < 0:
+        raise ValueError('invalid sampling/loss floor parameters')
     if out.exists():
         raise SystemExit("existing run directory: %s" % out)
     out.mkdir(parents=True)
@@ -125,7 +162,7 @@ def run(args) -> None:
 
     entry = copy / "main.py"
     original = entry.read_text()
-    updated = instrument_main(original, args.pretrain)
+    updated = patch_schedule(instrument_main(original, args.pretrain), args.schedule)
     (out / "source.diff").write_text("".join(difflib.unified_diff(
         original.splitlines(True), updated.splitlines(True), "author/main.py", "copy/main.py")))
     entry.write_text(updated)
@@ -137,6 +174,16 @@ def run(args) -> None:
             raise ValueError("local-GMM block not found exactly once in model.py")
         model_py.write_text(s.replace(OLD_LOCAL_GMM, NEW_LOCAL_GMM))
 
+    if args.sample_floor or args.usage_floor:
+        from lines.server_reweight.main import apply
+        apply(copy/'model.py', args.sample_floor, args.usage_floor, args.usage_beta)
+
+    for name in ('model.py',):
+        old = (src/name).read_text()
+        new = (copy/name).read_text()
+        (out/(name+'.diff')).write_text(''.join(difflib.unified_diff(
+            old.splitlines(True), new.splitlines(True), 'author/'+name, 'copy/'+name)))
+
     config = {"dataset": args.dataset, "partition_mode": args.mode, "seed": args.seed,
               "lr": args.lr, "alpha": args.alpha, "schedule": args.schedule,
               "sample": args.sample, "pretrain": args.pretrain, "rounds": args.rounds,
@@ -145,7 +192,12 @@ def run(args) -> None:
               "local_gmm": args.local_gmm, "wcp": args.wcp, "prune": args.prune,
               "source_dir": str(src), "platform": platform.platform(),
               "author_source_hashes": {q.name: _sha(q) for q in src.glob("*.py")},
-              "executed_main_sha": _sha(entry)}
+              "executed_main_sha": _sha(entry), 'executed_source_hashes': source_hashes(copy),
+              'data_dir': str(data_dir), 'data_sha256': sha256(dataset_file(data_dir,args.dataset)),
+              'command': [sys.executable, *sys.argv],
+              'repair_package': script_fingerprint(Path(__file__).resolve().parents[1]),
+              'runtime_packages': runtime_versions(), 'python':sys.version,
+              'sample_floor': args.sample_floor, 'usage_floor': args.usage_floor, 'usage_beta': args.usage_beta}
     _atomic_json(out / "config.json", config)
 
     sys.path.insert(0, str(copy))
@@ -153,6 +205,9 @@ def run(args) -> None:
     sys.dont_write_bytecode = True
     import torch
     from threadpoolctl import threadpool_limits
+    if args.device == 'cuda' and not torch.cuda.is_available():
+        raise RuntimeError('CUDA requested but unavailable; no CPU fallback')
+    os.chdir(out)
 
     if args.device == "cpu":
         torch.set_num_threads(1)
@@ -175,7 +230,14 @@ def run(args) -> None:
         k, loaders, (X, y), sizes, stats = data_mod.make_clients(
             args.dataset, args.mode, n_clients, batch_size, data_dir, copy, seed=42)
         config.update(partition=stats, input_dim=int(X.shape[1]), clusters=int(k),
-                      client_sizes=sizes)
+                      client_sizes=sizes, input_sha256=array_sha256(X.numpy()),
+                      label_sha256=array_sha256(y.numpy()))
+        # Read TensorDataset tensors directly: iterating shuffled loaders would consume training RNG.
+        config['client_data_hashes'] = [
+            {'x': array_sha256(ld.dataset.tensors[0].numpy()),
+             'y': array_sha256(ld.dataset.tensors[1].numpy())} for ld in loaders]
+        if stats.get('input_csv'):
+            config['input_csv_sha256'] = sha256(stats['input_csv'])
         _atomic_json(out / "config.json", config)
         return k, loaders, (X, y), sizes
 
@@ -220,6 +282,7 @@ def run(args) -> None:
         torch.save({"round": epoch, "server": state}, out / ("epoch_%03d_server.pt" % epoch))
         if full:
             torch.save({"round": epoch, "seed": args.seed, "server": state,
+                        'capability': 'evaluation_only; optimizer/scheduler/RNG not saved',
                         "clients": [{k: v.detach().cpu().clone() for k, v in c["vade"].state_dict().items()}
                                     for c in clients]}, out / "last_checkpoint.pt")
 
@@ -232,6 +295,7 @@ def run(args) -> None:
         row = {"round": epoch, "client_loss": float(lc), "server_loss": float(ls),
                "purity": float(purity), "ari": float(ari), "client_losses": losses,
                "server_lr": server["optimizer"].param_groups[0]["lr"],
+               'client_lr': [c['optimizer'].param_groups[0]['lr'] for c in clients],
                "nonfinite_server_params": srv_bad, "nonfinite_client_params": cli_bad,
                "nonfinite_client_losses": bad_loss,
                "elapsed_seconds": perf_counter() - started}
@@ -242,6 +306,7 @@ def run(args) -> None:
             nan_events.append({"round": epoch, "server": srv_bad, "clients": cli_bad,
                                "client_losses": bad_loss})
             _atomic_json(out / "nan_events.json", nan_events)
+            raise FloatingPointError('nonfinite loss/parameters; see nan_events.json')
         client_losses.clear()
         if epoch % args.save_every == 0 or epoch == args.rounds:
             _snapshot(epoch, server, clients, full=(epoch == args.rounds))
@@ -262,6 +327,10 @@ def run(args) -> None:
         import model as _model_mod
         _model_mod._fit_local = _fit_local
         _model_mod._record_k = _record_k
+        config['imported_model_file'] = str(Path(_model_mod.__file__).resolve())
+        if Path(_model_mod.__file__).resolve() != (copy/'model.py').resolve():
+            raise RuntimeError('wrong author model imported')
+        _atomic_json(out/'config.json',config)
         with threadpool_limits(limits=1), \
                 patch.object(sys, "argv", argv), \
                 patch.object(argparse.ArgumentParser, "parse_args", _force_device):
@@ -272,8 +341,9 @@ def run(args) -> None:
         if len(rows) != args.rounds:
             raise RuntimeError("incomplete rounds: %d / %d" % (len(rows), args.rounds))
         result.update(status="ok", last=rows[-1], nan_events=len(nan_events))
-    except SystemExit:
-        result.update(status="dump-only")
+    except SystemExit as exc:
+        result.update(status='dump-only' if args.dump_pretrain is not None and exc.code in (0,None)
+                      else 'failed', exit_code=exc.code)
         raise
     except BaseException as exc:
         result.update(status="failed", error=repr(exc), nan_events=len(nan_events))
@@ -284,7 +354,7 @@ def run(args) -> None:
 
 
 def main():
-    run(build_parser().parse_args())
+    _run_in_process(build_parser().parse_args())
 
 
 if __name__ == "__main__":
