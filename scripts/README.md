@@ -66,7 +66,7 @@ lines/diagnostics/main.py                    ← 定位诊断
 | `fm_data.py` / `fmnist_prep.py` / `clusterlet_partition.py` | `common/data.py` |
 | `metrics.py` / `evaluate_saved*.py` | `common/evaluate.py` |
 | `diagnose_loss.py` / `diagnose_decoder.py` | `lines/diagnostics/main.py` |
-| `models_patch_dpgmm.py` / `local_gmm.py` | `common/local_gmm.py` |
+| `model_patch_dpgmm.py` / `local_gmm.py` | `common/local_gmm.py` |
 | `multica_core.py` | `lines/server_multica/main.py` |
 | `run_acd_frozen.py` | `lines/client_acd/main.py` |
 
